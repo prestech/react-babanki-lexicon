@@ -16,7 +16,7 @@ export default class FreqCategories extends React.Component{
         super(props);
 
         this.state={
-            data:[1,2,3,4,5,6,7,8,9,10,11,12,13,14],
+            data:["HISTORY","FOOD","SONGS","POEMS","STORIES","OTHERS"],
         }
 
         this.extractKey = this.extractKey.bind(this);
@@ -31,7 +31,7 @@ export default class FreqCategories extends React.Component{
                         source={ {uri:imageUrl} }
                         resizeMode = 'cover'
                     />
-                    <Text>Box {item}</Text>
+                    <Text style={{alignSelf:'center'}}>{item}</Text>
                </View>)
     }
     extractKey(item){
