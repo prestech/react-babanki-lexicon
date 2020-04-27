@@ -49,7 +49,7 @@ export default class AddFavView extends React.Component{
           onCellPressed = {(category)=>{
             console.log("Logic to add lexicon to favorite");
           }}
-          
+          onSelectMode = {true}
           onAddItem = {this.onAddItem}
         />
       );

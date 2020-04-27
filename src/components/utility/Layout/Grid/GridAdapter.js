@@ -32,7 +32,8 @@ export default class GridAdapter extends React.Component{
             imageBlurLevel: 1
         }
        
-      
+        this.props.onSelectMode = false;
+
         this.addToListOfSelectedItems = this.addToListOfSelectedItems.bind(this);
         this.removeFromListOfSelectedItems = this.removeFromListOfSelectedItems.bind(this); 
         this.exitSelectMode = this.exitSelectMode.bind(this);
@@ -41,7 +42,7 @@ export default class GridAdapter extends React.Component{
     }
     componentDidMount(){
       this.setState({
-        isInSelectMode: this.props.canSelectItem
+        isInSelectMode: this.props.onSelectMode
 
       })
     }
@@ -85,6 +86,10 @@ export default class GridAdapter extends React.Component{
         console.log("Deleting selected items: ["+this.state.selectItems+"]")
         let selectedItemStr = this.state.selectItems.join(",");
         this.props.onDeleteItem(selectedItemStr);
+
+        this.setState({
+          isInSelectMode: false
+        })
       }
     }
     
@@ -103,7 +108,6 @@ export default class GridAdapter extends React.Component{
              addToListOfSelectedItems= {this.addToListOfSelectedItems}
              removeFromListOfSelectedItems = {this.removeFromListOfSelectedItems}
              onPress = {this.props.onCellPressed}
-              
            />
          );
     }
@@ -123,44 +127,46 @@ export default class GridAdapter extends React.Component{
             {this.groupViews()}
           </ScrollView>
           
-          <View style={styles.modifiers}>
-            <Icon
-                raised
-                name='md-add'
-                type='ionicon'
-                color='black' //color will change when clicked
-                size={26}
-                onPress={()=>{
-                  console.log("Added new item");
-                  this.onAddItem();
-                }}
-              />
-             <Icon
-                raised
-                name='ios-trash'
-                type='ionicon'
-                color='black' //color will change when clicked
-                size={26}
-                onPress={ ()=>this.onDeleteItem()}
-              />
+         { (this.props.canSelectItem === true)?
+            (<View style={styles.modifiers}>
               <Icon
-                raised
-                name='md-create'
-                type='ionicon'
-                color='black' //color will change when clicked
-                size={26}
-                //onPress={}
-              />
+                  raised
+                  name='md-add'
+                  type='ionicon'
+                  color='black' //color will change when clicked
+                  size={26}
+                  onPress={()=>{
+                    console.log("Added new item");
+                    this.onAddItem();
+                  }}
+                />
               <Icon
-                raised
-                name='md-close'
-                type='ionicon'
-                color='black' //color will change when clicked
-                size={26}
-                onPress={this.exitSelectMode}
-              />
+                  raised
+                  name='ios-trash'
+                  type='ionicon'
+                  color='black' //color will change when clicked
+                  size={26}
+                  onPress={ ()=>this.onDeleteItem()}
+                />
+                <Icon
+                  raised
+                  name='md-create'
+                  type='ionicon'
+                  color='black' //color will change when clicked
+                  size={26}
+                  //onPress={}
+                />
+                <Icon
+                  raised
+                  name='md-close'
+                  type='ionicon'
+                  color='black' //color will change when clicked
+                  size={26}
+                  onPress={this.exitSelectMode}
+                />
 
-          </View>
+            </View>)
+            : null }
        </>        
       );
     }   
