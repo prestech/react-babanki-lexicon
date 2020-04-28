@@ -11,6 +11,7 @@ const imagePath = 'https://via.placeholder.com/150';
 /***
  * TODO
  * --Add onPress call back methods 
+ * https://www.robinwieruch.de/react-state-array-add-update-remove
  */
 export default class AddFavView extends React.Component{
 
@@ -26,17 +27,27 @@ export default class AddFavView extends React.Component{
               {text:'Fav Family', imageUri:imagePath}, 
             ],
         }
+
         this.onAddItem = this.onAddItem.bind(this);
+        this.onDeleteItem = this.onDeleteItem.bind(this);
     }
-    
-      
-    onAddItem(){
+
+    onAddItem(title){
       console.log("new category added");
       this.setState( (state)=> {
-       return {dataSource: state.dataSource.push( {text:'Fav Family', imageUri:imagePath})}
+         const dataSource = state.dataSource.push( {text:title, imageUri:imagePath});
+         return(dataSource);
       }
       , ()=> {
         console.log(this.state.dataSource);
+      })
+    }
+
+    onDeleteItem(selectedItems){
+      let itemList = selectedItems.split(',');
+      console.log("FavCategory selectedItems: "+itemList);
+      this.setState( (state)=>{
+        return{dataSource: state.dataSource.filter( (item) => !itemList.includes(item.text))}
       })
     }
 
@@ -45,11 +56,12 @@ export default class AddFavView extends React.Component{
       return(
         <GridAdapter
           data={this.state.dataSource}
-          canSelectItem={true}
+          canSelectItem = {true}
           onCellPressed = {(category)=>{
-            console.log("Logic to add lexicon to favorite");
+            console.log("Fav Category cell pressed: ["+category+"]");
+            this.props.navigation.navigate("FavList");
           }}
-          onSelectMode = {true}
+          onDeleteItem = {this.onDeleteItem}
           onAddItem = {this.onAddItem}
         />
       );

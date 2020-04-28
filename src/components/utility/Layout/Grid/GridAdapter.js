@@ -6,6 +6,9 @@ import { FlatList,
          StyleSheet,
          Text,
          ScrollView,
+         Modal,
+         TextInput,
+         TouchableHighlight,
          TouchableOpacity
         } from 'react-native'
 import GridCell from './GridCell';
@@ -29,7 +32,9 @@ export default class GridAdapter extends React.Component{
         this.state = {
             selectItems: [],
             isInSelectMode: false,
-            imageBlurLevel: 1
+            imageBlurLevel: 1,
+            isModalVisible: false,
+            openEditRibon: false
         }
        
         this.props.onSelectMode = false;
@@ -43,20 +48,20 @@ export default class GridAdapter extends React.Component{
     componentDidMount(){
       this.setState({
         isInSelectMode: this.props.onSelectMode
-
       })
     }
     switchToSelectMode = ()=>{
       console.log("call back switchToSelectMode")
       this.setState({
-        isInSelectMode: true
+        isInSelectMode: true,
       })
     }
     exitSelectMode(){
       console.log("Exiting select mode")
       this.setState({
         isInSelectMode: false,
-        selectItems: []
+        selectItems: [],
+        openEditRibon: false
       })
       //refresh/reload gridcells
     }
@@ -88,13 +93,16 @@ export default class GridAdapter extends React.Component{
         this.props.onDeleteItem(selectedItemStr);
 
         this.setState({
-          isInSelectMode: false
+          isInSelectMode: false,
         })
       }
     }
     
-    onAddItem(){
-      this.props.onAddItem();
+    onAddItem(text){
+      this.props.onAddItem(text);
+      this.setState({
+        isModalVisible: false
+      })
     }
 
     mapItemToView(item){
@@ -119,6 +127,38 @@ export default class GridAdapter extends React.Component{
         </View>);
     }
 
+    popUpView(){
+
+      return(
+          <Modal
+            animationType='slide'
+            transparent={true}
+            visible={this.state.isModalVisible}
+          >
+            <View style={styles.modal} >
+                <TextInput
+                  style={style=styles.modalInput}
+                  onChangeText={(text)=>{
+                    this.setState({
+                      newCategoryName: text
+                    })
+                    
+                  }}
+                />
+
+                <TouchableHighlight 
+                    style={styles.createBtn}
+                    onPress={()=>{
+                      this.onAddItem( this.state.newCategoryName )
+                    }}
+                >
+                    <Text>Create New Category</Text>
+                </TouchableHighlight>
+            </View>
+          </Modal>
+          );
+    }
+
     render(){
 
       return(
@@ -127,8 +167,11 @@ export default class GridAdapter extends React.Component{
             {this.groupViews()}
           </ScrollView>
           
-         { (this.props.canSelectItem === true)?
-            (<View style={styles.modifiers}>
+          <View style={styles.modifiers}>
+         { ((this.props.canSelectItem === true &&
+            this.state.openEditRibon === true) || 
+            this.state.isInSelectMode==true)?
+             <> 
               <Icon
                   raised
                   name='md-add'
@@ -137,7 +180,9 @@ export default class GridAdapter extends React.Component{
                   size={26}
                   onPress={()=>{
                     console.log("Added new item");
-                    this.onAddItem();
+                    this.setState({
+                      isModalVisible: true
+                    });
                   }}
                 />
               <Icon
@@ -155,18 +200,37 @@ export default class GridAdapter extends React.Component{
                   color='black' //color will change when clicked
                   size={26}
                   //onPress={}
-                />
+                /> 
+                
                 <Icon
-                  raised
-                  name='md-close'
-                  type='ionicon'
-                  color='black' //color will change when clicked
-                  size={26}
-                  onPress={this.exitSelectMode}
-                />
+                    raised
+                    name='md-close'
+                    type='ionicon'
+                    color='black' //color will change when clicked
+                    size={26}
+                    onPress={this.exitSelectMode}
+                  />
 
-            </View>)
-            : null }
+              </>
+               : ( (this.props.canSelectItem === true &&
+                  this.state.openEditRibon === false)) ?
+                    <Icon
+                        raised
+                        name='md-arrow-dropup'
+                        type='ionicon'
+                        color='black' //color will change when clicked
+                        size={26}
+                        onPress={ ()=>{
+                          this.setState({
+                            openEditRibon: true
+                          })
+                        }}
+                      />: null
+
+            }
+            </View>
+
+            {this.popUpView()}
        </>        
       );
     }   
@@ -186,6 +250,37 @@ const styles = StyleSheet.create({
     },
     icon:{
       
+    },
+    modal:{
+      margin: 20,
+      backgroundColor: "white",
+      borderRadius: 20,
+      padding: 35,
+      top: '40%',
+      alignItems: "center",
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 2
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+      elevation: 5
+    },
+    modalInput:{
+      padding: '2%', 
+      width: '60%', 
+      height: 40, 
+      borderColor: 'gray', 
+      borderWidth: 1,
+      textAlign:'center'
+    },
+    createBtn: {
+      backgroundColor: "grey",
+      borderRadius: 2,
+      marginTop: '10%',
+      padding: 10,
+      elevation: 2
     }
   });
 

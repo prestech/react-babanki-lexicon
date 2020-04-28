@@ -32,10 +32,10 @@ export default class FavCategory extends React.Component{
         this.onDeleteItem = this.onDeleteItem.bind(this);
     }
 
-    onAddItem(){
+    onAddItem(title){
       console.log("new category added");
       this.setState( (state)=> {
-         const dataSource = state.dataSource.push( {text:'New Item', imageUri:imagePath});
+         const dataSource = state.dataSource.push( {text:title, imageUri:imagePath});
          return(dataSource);
       }
       , ()=> {
