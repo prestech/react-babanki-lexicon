@@ -10,6 +10,7 @@ import {
 import FreqCategories from './FreqCategories';
 import WordOfTheDay from './WordOfTheDay';
 import Lessons from './Lessons';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 export default class HomeView extends React.Component{
@@ -23,15 +24,17 @@ export default class HomeView extends React.Component{
 
        return(
          <SafeAreaView>
-            <WordOfTheDay
-                style={styles.wordOfTheDay}
-            />
-            <Lessons
-                style={styles.lessons}
-            />
-             <FreqCategories
-                style={styles.freqCategories}
-            />
+             <ScrollView>
+                <WordOfTheDay
+                    style={styles.wordOfTheDay}
+                />
+                <Lessons
+                    style={styles.lessons}
+                />
+                <FreqCategories
+                    style={styles.freqCategories}
+                />
+            </ScrollView>
          </SafeAreaView>
        );
     }
@@ -49,7 +52,7 @@ const styles = StyleSheet.create({
     freqCategories:{
         backgroundColor: 'lightgrey',
         height: '25%',
-        //flex: 1
+        paddingTop: '3%'
     },
     lessons:{
         backgroundColor: 'lightgrey',
