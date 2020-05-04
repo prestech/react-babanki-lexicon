@@ -24,6 +24,7 @@ export default class HomeView extends React.Component{
 
        return(
          <SafeAreaView>
+             <ScrollView>
                 <WordOfTheDay
                     style={styles.wordOfTheDay}
                 />
@@ -33,6 +34,7 @@ export default class HomeView extends React.Component{
                 <FreqCategories
                     style={styles.freqCategories}
                 />
+            </ScrollView>
          </SafeAreaView>
        );
     }
@@ -54,8 +56,6 @@ const styles = StyleSheet.create({
     },
     lessons:{
         backgroundColor: 'lightgrey',
-        height: '40%',
-        marginTop: '3%',
-        marginBottom: '3%'
+        height: '45%',
     }
 });
