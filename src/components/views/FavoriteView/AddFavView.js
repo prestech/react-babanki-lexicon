@@ -58,8 +58,7 @@ export default class AddFavView extends React.Component{
           data={this.state.dataSource}
           canSelectItem = {true}
           onCellPressed = {(category)=>{
-            console.log("Fav Category cell pressed: ["+category+"]");
-            this.props.navigation.navigate("FavList");
+            console.log("Fav Category cell selected: ["+category+"]");
           }}
           onDeleteItem = {this.onDeleteItem}
           onAddItem = {this.onAddItem}
