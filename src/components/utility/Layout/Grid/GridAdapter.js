@@ -44,6 +44,7 @@ export default class GridAdapter extends React.Component{
         this.exitSelectMode = this.exitSelectMode.bind(this);
         this.onAddItem = this.onAddItem.bind(this);
         this.onDeleteItem = this.onDeleteItem.bind(this);
+        this.clearListOfSelectedItems = this.clearListOfSelectedItems.bind(this);
     }
     componentDidMount(){
       this.setState({
@@ -82,9 +83,17 @@ export default class GridAdapter extends React.Component{
         return selectItems;
       }, ()=>{
         console.log("selectItems: "+ this.state.selectItems);
-      })
-      
+      })    
     }
+    clearListOfSelectedItems(){
+      console.log("Clearing list of select items ");
+      this.setState( {
+         selectItems:[]
+      }, ()=>{
+        this.exitSelectMode();
+      }) 
+    }
+
     onDeleteItem(){
       console.log("OnDelete function called...")
       if(this.props.canSelectItem === true){
@@ -99,10 +108,25 @@ export default class GridAdapter extends React.Component{
     }
     
     onAddItem(text){
-      this.props.onAddItem(text);
-      this.setState({
-        isModalVisible: false
-      })
+     
+      new Promise( (resolve, reject)=>{
+
+        if(!text){
+          console.log("No text entered ")
+          return;
+        }
+
+        console.log("Adding new category "+text)
+
+        this.props.onAddItem(text); 
+        resolve("done");
+      }).then( (result)=>{
+        this.setState({
+          isModalVisible: false,
+          newCategoryName: ''
+        })
+      });
+      
     }
 
     mapItemToView(item){
@@ -154,6 +178,18 @@ export default class GridAdapter extends React.Component{
                 >
                     <Text>Create New Category</Text>
                 </TouchableHighlight>
+
+                <TouchableHighlight 
+                    style={styles.cancelBtn}
+                    onPress={()=>{
+                      this.setState( {
+                          isModalVisible: false
+                      })
+                    }}
+                >
+                    <Text>Cancel New Category</Text>
+                </TouchableHighlight>
+
             </View>
           </Modal>
           );
@@ -182,6 +218,8 @@ export default class GridAdapter extends React.Component{
                     console.log("Added new item");
                     this.setState({
                       isModalVisible: true
+                    },()=>{
+                      this.clearListOfSelectedItems();
                     });
                   }}
                 />
@@ -277,6 +315,13 @@ const styles = StyleSheet.create({
     },
     createBtn: {
       backgroundColor: "grey",
+      borderRadius: 2,
+      marginTop: '10%',
+      padding: 10,
+      elevation: 2
+    },
+    cancelBtn: {
+      backgroundColor: "red",
       borderRadius: 2,
       marginTop: '10%',
       padding: 10,
