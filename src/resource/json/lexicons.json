@@ -7,7 +7,8 @@
         "variant": null,
         "examplePhrase": null,
         "pronunciation": "á ǹtèmá ǹtèmə̀",
-        "lexiconId": 17
+        "lexiconId": 17,
+        "label": "time, sequence"
       },
       {
         "kejomWord": "a shèn",
@@ -17,7 +18,8 @@
         "variant": null,
         "examplePhrase": null,
         "pronunciation": "á ʃɛ̀n",
-        "lexiconId": 18
+        "lexiconId": 18,
+        "label": "locate"
       },
       {
         "kejomWord": "a shə̀",
@@ -27,7 +29,8 @@
         "variant": null,
         "examplePhrase": null,
         "pronunciation": "á ʃə̀",
-        "lexiconId": 19
+        "lexiconId": 19, 
+        "label": "locate"
       },
       {
         "kejomWord": "a shɨ",
@@ -37,7 +40,8 @@
         "variant": null,
         "examplePhrase": null,
         "pronunciation": "á ʃɨ́",
-        "lexiconId": 20
+        "lexiconId": 20,
+        "label": "locate"
       },
       {
         "kejomWord": "a tin",
@@ -47,7 +51,8 @@
         "variant": null,
         "examplePhrase": null,
         "pronunciation": "á tín",
-        "lexiconId": 21
+        "lexiconId": 21,
+        "label": "locate"
       },
       {
         "kejomWord": "a tyi",
@@ -57,7 +62,8 @@
         "variant": null,
         "examplePhrase": null,
         "pronunciation": "á tʲí",
-        "lexiconId": 22
+        "lexiconId": 22,
+        "label": "locate"
       },
       {
         "kejomWord": "abè",
@@ -67,7 +73,8 @@
         "variant": null,
         "examplePhrase": null,
         "pronunciation": "àbȅ",
-        "lexiconId": 23
+        "lexiconId": 23,
+        "label": "organ"
       },
       {
         "kejomWord": "abe a bwa’ghə",
@@ -77,7 +84,8 @@
         "variant": null,
         "examplePhrase": null,
         "pronunciation": "àbé á bwáʔɣə́",
-        "lexiconId": 24
+        "lexiconId": 24,
+        "label": "organ"
       },
       {
         "kejomWord": "abe a bwa’zə",
@@ -87,7 +95,8 @@
         "variant": null,
         "examplePhrase": null,
         "pronunciation": "àbé á bwáʔzə́",
-        "lexiconId": 25
+        "lexiconId": 25,
+        "label": "organ"
       },
       {
         "kejomWord": "àbìkəŋ",
@@ -97,7 +106,8 @@
         "variant": " vabikəŋ",
         "examplePhrase": null,
         "pronunciation": "àbìkə́ŋ",
-        "lexiconId": 26
+        "lexiconId": 26,
+        "label": "animal, wild"
       },
       {
         "kejomWord": "àbʉ̀mu’",
@@ -107,7 +117,8 @@
         "variant": null,
         "examplePhrase": null,
         "pronunciation": "àbʉ̀múʔ",
-        "lexiconId": 27
+        "lexiconId": 27,
+        "label": "number"
       },
       {
         "kejomWord": "àdʉ̀ ǹkamsə",
@@ -117,7 +128,8 @@
         "variant": " vadʉ nkamsə",
         "examplePhrase": null,
         "pronunciation": "àdʉ̀ ŋ̀kámsə̄",
-        "lexiconId": 28
+        "lexiconId": 28,
+        "label": "number"
       },
       {
         "kejomWord": "àdzòŋ",
@@ -127,7 +139,8 @@
         "variant": " vadzoŋ",
         "examplePhrase": null,
         "pronunciation": "àdzɔ̀ŋ",
-        "lexiconId": 29
+        "lexiconId": 29,
+        "label": "plant, fruit"
       },
       {
         "kejomWord": "aghʉ ənshen",
@@ -137,7 +150,8 @@
         "variant": null,
         "examplePhrase": null,
         "pronunciation": "àɣʉ́ ǹʃɛ́n",
-        "lexiconId": 30
+        "lexiconId": 30,
+        "label":"illness"
       },
       {
         "kejomWord": "àjùŋ",
@@ -147,7 +161,8 @@
         "variant": null,
         "examplePhrase": null,
         "pronunciation": "àdʒùŋ",
-        "lexiconId": 31
+        "lexiconId": 31,
+        "label":"day"
       },
       {
         "kejomWord": "akwen ə mənkalə̀",
@@ -157,7 +172,8 @@
         "variant": null,
         "examplePhrase": null,
         "pronunciation": "àkwɛ́ mə̀ŋkálə̀",
-        "lexiconId": 32
+        "lexiconId": 32,
+        "label":"plant, grains"
       },
       {
         "kejomWord": "àlò’",
@@ -167,7 +183,8 @@
         "variant": " valo’",
         "examplePhrase": null,
         "pronunciation": "àlɔ̀ʔ",
-        "lexiconId": 33
+        "lexiconId": 33,
+        "label":"fashion"
       },
       {
         "kejomWord": "alʉ̀’",
@@ -177,7 +194,8 @@
         "variant": null,
         "examplePhrase": null,
         "pronunciation": "àlʉ̀ʔ",
-        "lexiconId": 34
+        "lexiconId": 34,
+        "label":"plant"
       },
       {
         "kejomWord": "amfwom",
@@ -187,7 +205,8 @@
         "variant": null,
         "examplePhrase": null,
         "pronunciation": "àɱfwɔ́m",
-        "lexiconId": 35
+        "lexiconId": 35,
+        "label":"organ"
       },
       {
         "kejomWord": "amfwom ə kəkwəŋ",
@@ -197,6 +216,7 @@
         "variant": null,
         "examplePhrase": null,
         "pronunciation": "àɱfwóm ə́ kə́kwə̄ŋ",
-        "lexiconId": 36
+        "lexiconId": 36,
+        "label":"organ"
       }
 ]

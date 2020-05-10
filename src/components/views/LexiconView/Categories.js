@@ -10,7 +10,8 @@ import { FlatList,
 import { NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-const imagePath = 'https://via.placeholder.com/150';
+import {categories} from '../../utility/Service/ProvideCategories'; 
+
 const stack = createStackNavigator();
 /***
  * TODO
@@ -22,28 +23,15 @@ export default class FavCategory extends React.Component{
         super();
         this.state = {
             //Place holder data
-            dataSource: [ 
-              {text:'Calendar', imageUri:imagePath},
-              {text:'Name', imageUri:imagePath}, 
-              {text:'Food', imageUri:imagePath}, 
-              {text:'Animal', imageUri:imagePath}, 
-              {text:'Family', imageUri:imagePath}, 
-              {text:'Fashion', imageUri:imagePath}, 
-              {text:'Disease', imageUri:imagePath}, 
-              {text:'Nature', imageUri:imagePath}, 
-              {text:'Calendar', imageUri:imagePath},
-              {text:'Name', imageUri:imagePath}, 
-              {text:'Food', imageUri:imagePath}, 
-              {text:'Animal', imageUri:imagePath}, 
-              {text:'Family', imageUri:imagePath}, 
-              {text:'Fashion', imageUri:imagePath}, 
-              {text:'Disease', imageUri:imagePath}, 
-              {text:'Nature', imageUri:imagePath},
-            ],
+            dataSource: []
         }
-
     }
-  
+    
+    componentDidMount(){
+      this.setState({
+        dataSource:categories
+      })
+    }
     render(){
 
       return(
@@ -51,7 +39,7 @@ export default class FavCategory extends React.Component{
           data={this.state.dataSource}
           canSelectItem = {false}
           onCellPressed = {(category)=>{
-            this.props.navigation.navigate("LexiconList");
+            this.props.navigation.navigate("LexiconList", {category});
             console.log("Category cell pressed: ["+category+"]");
           }}
         />
