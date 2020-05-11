@@ -8,7 +8,7 @@
         "examplePhrase": null,
         "pronunciation": "á ǹtèmá ǹtèmə̀",
         "lexiconId": 17,
-        "label": "time, sequence"
+        "label": "time"
       },
       {
         "kejomWord": "a shèn",
@@ -74,7 +74,7 @@
         "examplePhrase": null,
         "pronunciation": "àbȅ",
         "lexiconId": 23,
-        "label": "organ"
+        "label": "anatomy, organ"
       },
       {
         "kejomWord": "abe a bwa’ghə",
@@ -85,7 +85,7 @@
         "examplePhrase": null,
         "pronunciation": "àbé á bwáʔɣə́",
         "lexiconId": 24,
-        "label": "organ"
+        "label": "anatomy, organ"
       },
       {
         "kejomWord": "abe a bwa’zə",
@@ -96,7 +96,7 @@
         "examplePhrase": null,
         "pronunciation": "àbé á bwáʔzə́",
         "lexiconId": 25,
-        "label": "organ"
+        "label": "anatomy, organ"
       },
       {
         "kejomWord": "àbìkəŋ",
@@ -199,14 +199,14 @@
       },
       {
         "kejomWord": "amfwom",
-        "englishWord": " marrow",
+        "englishWord": "marrow",
         "partOfSpeech": " n 6",
         "pluralForm": null,
         "variant": null,
         "examplePhrase": null,
         "pronunciation": "àɱfwɔ́m",
         "lexiconId": 35,
-        "label":"organ"
+        "label":"anatomy, organ"
       },
       {
         "kejomWord": "amfwom ə kəkwəŋ",
@@ -217,6 +217,6 @@
         "examplePhrase": null,
         "pronunciation": "àɱfwóm ə́ kə́kwə̄ŋ",
         "lexiconId": 36,
-        "label":"organ"
+        "label":"anatomy, organ"
       }
 ]
