@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-
+import SvgUri from 'react-native-svg-uri';
 import { FlatList,
     View,
     Image,
@@ -8,6 +8,9 @@ import { FlatList,
     ScrollView,
     TouchableOpacity
 } from 'react-native'
+
+import { default as Zebra } from '../../../../resource/image/Zebra'
+
 /**
  * TODO
  * Each Grid will have an 'Edit' UI to eidt the name when in edit mode
@@ -93,12 +96,11 @@ export default class GridCell extends React.Component{
                                 } 
                     onPress={ this.onHandlePress}
             >
-                <Image
-                    style={styles.image }
-                    source={{uri: this.props.imageUri}}
-                    resizeMode = 'cover'
-                    blurRadius = {this.state.imageBlurLevel}
-                  />
+               
+              <View style={styles.image}>
+                    {this.props.imageUri}
+              </View>
+              
               <Text style={styles.imageTitle} >{this.props.text}</Text>
           </TouchableOpacity>
         </View>);
@@ -112,7 +114,9 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     imageTitle:{
-      alignSelf: 'center'
+      alignSelf: 'center',
+      fontSize: 20,
+      fontFamily: 'Cochin'
     },
     image: {
       width: 100,

@@ -7,7 +7,6 @@ import { FlatList,
          StyleSheet,
         } from 'react-native'
 
-import { NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import {categories} from '../../utility/Service/ProvideCategories'; 

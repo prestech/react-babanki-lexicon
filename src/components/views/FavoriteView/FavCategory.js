@@ -1,5 +1,6 @@
 import React from 'react';
 import GridAdapter from '../../utility/Layout/Grid/GridAdapter'
+import { default as Zebra } from '../../../resource/image/Wild'
 
 import { FlatList,
          View,
@@ -20,11 +21,11 @@ export default class FavCategory extends React.Component{
         this.state = {
             //Place holder data
             dataSource: [ 
-              {text:'Fav Calendar', imageUri:imagePath},
-              {text:'Fav Name', imageUri:imagePath}, 
-              {text:'Fav Food', imageUri:imagePath}, 
-              {text:'Fav Animal', imageUri:imagePath}, 
-              {text:'Fav Family', imageUri:imagePath}, 
+              {text:'Fav Calendar', imageUri:Zebra},
+              {text:'Fav Name', imageUri:Zebra}, 
+              {text:'Fav Food', imageUri:Zebra}, 
+              {text:'Fav Animal', imageUri:Zebra}, 
+              {text:'Fav Family', imageUri:Zebra}, 
             ],
         }
 
