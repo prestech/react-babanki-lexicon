@@ -11,57 +11,78 @@ import React from 'react'
  *      -return the list of categories.  
  */
 
-import { default as Zebra } from '../../../resource/image/Zebra'
-import { default as Anatomy } from '../../../resource/image/Anatomy'
-import { default as Count } from '../../../resource/image/Count'
-import { default as Fashion } from '../../../resource/image/Fashion'
-import { default as Grain } from '../../../resource/image/Grain'
-import { default as Plant } from '../../../resource/image/Plant'
-import { default as Illness } from '../../../resource/image/Illness'
-import { default as Day } from '../../../resource/image/Day'
-import { default as Locate } from '../../../resource/image/Locate'
-import { default as Necklace } from '../../../resource/image/Necklace'
-import { default as Organ } from '../../../resource/image/Organ'
-import { default as Time } from '../../../resource/image/Time'
-import { default as Wild } from '../../../resource/image/Wild'
+import * as lexSvg  from '../../../resource/image/index'
 
-
-const getComponent = (name)=>{
+export const getComponent = (name)=>{
 
     console.log("Svg manager: "+ name)
 
-    switch(name.trim()){
-        case 'zebra':
-            return <Zebra/>;
-        case 'number':
-            return <Count/>;
-        case 'fashion':
-            return <Fashion/>;
-        case 'illness':
-            return <Illness/>;
-        case 'animal':
-            return <Wild/>;
-        case 'time':
-            return <Time/>; 
-        case 'plant':
-            return <Plant/>;
-        case 'locate':
-            return <Locate/>;
-        case 'grain':
-            return <Grain/>;
-        case 'anatomy':
-            return <Anatomy/>;
-        case 'organ':
-            return <Organ/>;
-        case 'day':
-            return <Day/>;
-        default : return <Zebra/>; 
+    switch(true){
+        case name.includes('zebra'):
+            return <lexSvg.Zebra/>;
+        case name.includes('number'):
+            return <lexSvg.Count/>;
+        case name.includes('fashion'):
+            return <lexSvg.Fashion/>;
+        case name.includes('illness'):
+            return <lexSvg.Illness/>;
+        case name.includes('animal'):
+            return <lexSvg.Wild/>;
+        case name.includes('time'):
+            return <lexSvg.Time/>; 
+        case name.includes('plant'):
+            return <lexSvg.Plant/>;
+        case name.includes('locate'):
+            return <lexSvg.Locate/>;
+        case name.includes('grain'):
+            return <lexSvg.Grain/>;
+        case name.includes('anatomy'):
+            return <lexSvg.Anatomy/>;
+        case name.includes('organ'):
+            return <lexSvg.Organ/>;
+        case name.includes('day'):
+            return <lexSvg.Day/>;
+        case name.includes('bird'):
+            return <lexSvg.Bird/>;
+        case name.includes('butterfly'):
+            return <lexSvg.Butterfly/>;
+        case name.includes('dunky'):
+            return <lexSvg.Dunky/>;
+        case name.includes('elephant'):
+            return <lexSvg.Elephant/>;
+        case name.includes('fish'):
+            return <lexSvg.Fish/>;
+        case name.includes('frog'):
+            return <lexSvg.Frog/>;
+        case name.includes('lung'):
+            return <lexSvg.Lungs/>;
+        case name.includes('pepper'):
+            return <lexSvg.Peppers/>; 
+        case name.includes('pig'):
+            return <lexSvg.Pig/>;
+        case name.includes('potato'):
+            return <lexSvg.Locate/>;
+        case name.includes('snake'):
+            return <lexSvg.Snake/>;
+        case name.includes('tiger'):
+            return <lexSvg.Tiger/>;
+        case name.includes('tree'):
+            return <lexSvg.Tree/>;
+        case name.includes('day'):
+            return <lexSvg.Day/>;
+        case name.includes('bird'):
+            return <lexSvg.Bird/>;
+        case name.includes('butterfly'):
+            return <lexSvg.Butterfly/>;
+        case name.includes('lion'):
+            return <lexSvg.Lion/>;
+        case name.includes('necklace'):
+            return <lexSvg.Necklace/>;
+        default : return <lexSvg.Time/>; 
     }
 }
 
 const lexicon = require('../../../resource/json/lexicons.json');
-
-const imagePath = '/Users/presleymuwan/projects/mobile/react/babankiLexicon/src/resource/image/';
 
  function extractCategories(){
     let categoryList = [];
@@ -82,18 +103,17 @@ const imagePath = '/Users/presleymuwan/projects/mobile/react/babankiLexicon/src/
                 imageUri: getComponent(element)
             })
         }
-
     );
  }
 
-export const categories = extractCategories();
 
 export function filterLexicon(category){
-    console.log(category);
-    filteredLex = lexicon.filter(element => element.label.includes(category) );
-    console.log("filteredLex: "+ filteredLex);
+    category = category.toLowerCase();
+    filteredLex = lexicon.filter(element => element.label.includes(category));
+   
     return filteredLex;
 }
 
+export const categories = extractCategories();
 
 

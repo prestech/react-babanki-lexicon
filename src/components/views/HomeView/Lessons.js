@@ -25,7 +25,7 @@ export default class Lessons extends React.Component{
 
     setListItems(item){
        return ( <View style={styles.listItem}>
-                    <Text>{item}</Text>
+                    <Text style={{fontFamily:'Cochin', fontSize:20}}>{item}</Text>
                </View>)
     }
     extractKey(item){
@@ -36,7 +36,7 @@ export default class Lessons extends React.Component{
 
         return (
             <SafeAreaView style={this.props.style}>
-                    <Text>Lessons</Text>
+                    <Text style={{fontFamily:'Cochin', fontSize:20}}>Lessons</Text>
                     <ListAdapter 
                         data={this.state.data}
                         listItem = {this.setListItems}

@@ -86,6 +86,7 @@ export default class NavListAdapter extends React.Component{
                     listItem={this.setMainListView}
                     data = {this.props.data}
                     extractKey = {this.extractMainListKey}
+                    
                 />
 
             </View>

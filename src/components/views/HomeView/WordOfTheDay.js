@@ -18,7 +18,6 @@ export default class WordOfTheDay extends React.Component{
         super(props)
     }
 
-    
     render(){
 
         return (

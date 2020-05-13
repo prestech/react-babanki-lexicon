@@ -39,8 +39,7 @@ export default class ListAdapter extends React.Component{
 
     render(){
      return(   
-            <SafeAreaView style={this.props.style}>
-                <FlatList
+              <FlatList
                     data={this.state.data}
                     renderItem={ ({item}) =>{
 
@@ -50,7 +49,6 @@ export default class ListAdapter extends React.Component{
                     keyExtractor= {this.props.extractKey}
                     horizontal = {this.props.horizontal}
                 />
-            </SafeAreaView>
         )
     }
 }

@@ -31,7 +31,8 @@ export default class FreqCategories extends React.Component{
                         source={ {uri:imageUrl} }
                         resizeMode = 'cover'
                     />
-                    <Text style={{alignSelf:'center'}}>{item}</Text>
+                    
+                    <Text style={{alignSelf:'center', fontSize:15, fontFamily:'cochin'}}>{item}</Text>
                </View>)
     }
     extractKey(item){

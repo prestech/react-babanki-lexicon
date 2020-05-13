@@ -24,13 +24,14 @@ export default class LexiconList extends React.Component{
     constructor(props){
         super(props)
     }
+
+    
     render(){
         const {category} = this.props.route.params;
 
         console.log("selected category: " + category);
 
         return(
-            <>
               < NavListAdapter
                     navData = {navData}
                     data = {filterLexicon(category)}
@@ -40,7 +41,6 @@ export default class LexiconList extends React.Component{
                     onSpeakerIconTouch={ ()=>{
                     }}
                 />
-            </>
         )
     }
 }
