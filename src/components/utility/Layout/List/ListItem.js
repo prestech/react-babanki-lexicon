@@ -9,7 +9,7 @@ import {
         Image
         } from 'react-native'
 
-import {getComponent} from '../../../utility/Service/ProvideCategories'
+import {getComponent} from '../../../utility/Service/SvgManager'
 
 const imageUrl = "https://via.placeholder.com/150";
 
