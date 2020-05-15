@@ -11,6 +11,8 @@ import {
 
 import {Card} from 'react-native-shadow-cards'
 
+import {getWordOfTheDay} from '../../utility/Service/LexiconMananger'
+
 const imageUrl = "https://via.placeholder.com/150";
 
 export default class WordOfTheDay extends React.Component{
@@ -21,7 +23,7 @@ export default class WordOfTheDay extends React.Component{
     }
 
     render(){
-
+        wordOfTheDay = getWordOfTheDay();
         return (
             <Card style={this.props.style}>
                 <Text style={{alignSelf:'center', fontSize:20, fontFamily:'cochin'}}>Word of the day</Text>
@@ -33,9 +35,9 @@ export default class WordOfTheDay extends React.Component{
                     />
                     <View style={styles.words}>
                          {/*Is there a space tag*/}
-                        <Text style={styles.words}>Kedjom word</Text>
+                        <Text style={styles.words}>{wordOfTheDay.nativeWord}</Text>
                         {/*Wrap very long text*/}
-                        <Text style={styles.words}>English word</Text>
+                        <Text style={styles.words}>{wordOfTheDay.englishWord}</Text>
                     </View>
 
 
@@ -66,9 +68,9 @@ export default class WordOfTheDay extends React.Component{
                 </View>
 
                 <View style={{paddingHorizontal: 25}}>
-                    <Text>Example use of word (ex.1)</Text>
-                    <Text>Example use of word (ex.2)</Text>
-                    <Text>Example use of word (ex.3)</Text>
+                    <Text>(ex.1)</Text>
+                    <Text>(ex.2)</Text>
+                    <Text>(ex.3)</Text>
                 </View>
                    
 

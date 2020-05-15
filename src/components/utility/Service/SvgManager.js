@@ -1,46 +1,72 @@
 import * as React from 'react'
-import { default as Zebra } from '../../../resource/image/Zebra'
-import { default as Anatomy } from '../../../resource/image/Anatomy'
-import { default as Dice } from '../../../resource/image/Dice'
-import { default as Fashion } from '../../../resource/image/Fashion'
-import { default as Grain } from '../../../resource/image/Grain'
-import { default as Hipo } from '../../../resource/image/Hipo'
-import { default as Illness } from '../../../resource/image/Illness'
-import { default as Lion } from '../../../resource/image/Lion'
-import { default as Locate } from '../../../resource/image/Locate'
-import { default as Necklace } from '../../../resource/image/Necklace'
-import { default as Organ } from '../../../resource/image/Organ'
-import { default as Time } from '../../../resource/image/Time'
-import { default as Wild } from '../../../resource/image/Wild'
+import * as lexSvg  from '../../../resource/image/index'
 
 
-const getComponent = (name)=>{
+export const getComponent = (name)=>{
 
-    switch(name){
-        case 'zebra':
-            return <Zebra/>;
-        case 'count':
-            return <Count/>;
-        case 'fashion':
-            return <Fashion/>;
-        case 'illness':
-            return <Illness/>;
-        case 'wild':
-            return <Wild/>;
-        case 'time':
-            return <Time/>; 
-        case 'necklace':
-            return <Necklace/>;
-        case 'locate':
-            return <Locate/>;
-        case 'grain':
-            return <Grain/>;
-        case 'anatomy':
-            return <Anatomy/>;
-        case 'orgain':
-            return <Organ/>;
-        default : return <SvgZebra/>; 
+    console.log("Svg manager: "+ name)
+
+    switch(true){
+        case name.includes('zebra'):
+            return <lexSvg.Zebra/>;
+        case name.includes('number'):
+            return <lexSvg.Count/>;
+        case name.includes('fashion'):
+            return <lexSvg.Fashion/>;
+        case name.includes('illness'):
+            return <lexSvg.Illness/>;
+        case name.includes('animal'):
+            return <lexSvg.Wild/>;
+        case name.includes('time'):
+            return <lexSvg.Time/>; 
+        case name.includes('plant'):
+            return <lexSvg.Plant/>;
+        case name.includes('locate'):
+            return <lexSvg.Locate/>;
+        case name.includes('grain'):
+            return <lexSvg.Grain/>;
+        case name.includes('anatomy'):
+            return <lexSvg.Anatomy/>;
+        case name.includes('organ'):
+            return <lexSvg.Organ/>;
+        case name.includes('day'):
+            return <lexSvg.Day/>;
+        case name.includes('bird'):
+            return <lexSvg.Bird/>;
+        case name.includes('butterfly'):
+            return <lexSvg.Butterfly/>;
+        case name.includes('dunky'):
+            return <lexSvg.Dunky/>;
+        case name.includes('elephant'):
+            return <lexSvg.Elephant/>;
+        case name.includes('fish'):
+            return <lexSvg.Fish/>;
+        case name.includes('frog'):
+            return <lexSvg.Frog/>;
+        case name.includes('lung'):
+            return <lexSvg.Lungs/>;
+        case name.includes('pepper'):
+            return <lexSvg.Peppers/>; 
+        case name.includes('pig'):
+            return <lexSvg.Pig/>;
+        case name.includes('potato'):
+            return <lexSvg.Locate/>;
+        case name.includes('snake'):
+            return <lexSvg.Snake/>;
+        case name.includes('tiger'):
+            return <lexSvg.Tiger/>;
+        case name.includes('tree'):
+            return <lexSvg.Tree/>;
+        case name.includes('day'):
+            return <lexSvg.Day/>;
+        case name.includes('bird'):
+            return <lexSvg.Bird/>;
+        case name.includes('butterfly'):
+            return <lexSvg.Butterfly/>;
+        case name.includes('lion'):
+            return <lexSvg.Lion/>;
+        case name.includes('necklace'):
+            return <lexSvg.Necklace/>;
+        default : return <lexSvg.Drawing/>; 
     }
 }
-
-export default getComponent

@@ -7,10 +7,11 @@ import {
         Stylesheet
     }from 'react-native';
 
+import {lexicon} from '../../utility/Service/LexiconMananger';
+
 import NavListAdapter from '../../utility/Layout/List/NavListAdapter'
 
 //place holder data
-const lexicon = require('../../../resource/json/lexicons.json');
 //place holder data 
 const navData = ["A", "B", "Bv", "Ch", "D", "Dz", "E", "Ə", "Ff", "G", "Gh", 
     "I", "Ɨ", "J", "K", "L", "M", "N", "Ny", "Ŋ", "O", "Pf", 
