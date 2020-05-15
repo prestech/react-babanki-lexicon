@@ -40,6 +40,7 @@ export default class ListAdapter extends React.Component{
     render(){
      return(   
               <FlatList
+                    contentContainerStyle={this.props.contentContainerStyle}
                     data={this.state.data}
                     renderItem={ ({item}) =>{
 

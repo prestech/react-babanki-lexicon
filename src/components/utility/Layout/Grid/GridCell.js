@@ -9,6 +9,8 @@ import { FlatList,
     TouchableOpacity
 } from 'react-native'
 
+import {Card} from 'react-native-shadow-cards'
+
 import { default as Zebra } from '../../../../resource/image/Zebra'
 
 /**
@@ -97,11 +99,12 @@ export default class GridCell extends React.Component{
                     onPress={ this.onHandlePress}
             >
                
-              <View style={styles.image}>
+              <Card style={styles.image}>
                     {this.props.imageUri}
-              </View>
+              </Card>
               
               <Text style={styles.imageTitle} >{this.props.text}</Text>
+             
           </TouchableOpacity>
         </View>);
   

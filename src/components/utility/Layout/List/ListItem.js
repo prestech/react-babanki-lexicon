@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-
-import {Icon} from 'react-native-elements'
+import {Card} from 'react-native-shadow-cards'
+import {Icon, Divider} from 'react-native-elements'
 import {
         StyleSheet,
         Text,
@@ -16,24 +16,26 @@ const imageUrl = "https://via.placeholder.com/150";
  const DropDownDisplay = (props)=>{
 
         return (
-                 <View style={{paddingHorizontal: 25}}>
+                 <Card style={{ marginLeft:'1.5%'}}>
                         <View style={styles.wordsImgIcon}>
-                            {getComponent(props.word)}
-                            <View style={styles.words}>
+                            {getComponent(props.lexicon.englishWord)}
+                            <View style={styles.detailView}>
                                  {/*Is there a space tag*/}
-                                <Text style={styles.words}>Part of Speech</Text>
+                                 <Text style={styles.words}>Phonetic: {props.lexicon.pronunciation}</Text>
+                                 <Text style={styles.words}>Sp: {props.lexicon.partOfSpeech}</Text>
+                                 <Text style={styles.words}>Pl: { (props.lexicon.pluralForm)?props.lexicon.pluralForm: "?"}</Text>
+                                 <Text style={styles.words}>Var: { (props.lexicon.variant)?props.lexicon.variant: "?"}</Text>
                                 {/*Wrap very long text*/}
-                                <Text style={styles.words}>Synonyms</Text>
                             </View>
             
                         </View>
-        
-                        <View>
-                            <Text>Example use of word (ex.1)</Text>
-                            <Text>Example use of word (ex.2)</Text>
-                            <Text>Example use of word (ex.3)</Text>
+
+                        <View style={styles.exampleUseView}>
+                            <Text style={styles.exampleUse}>Ex1</Text>
+                            <Text style={styles.exampleUse}>Ex2</Text>
+                            <Text style={styles.exampleUse}>Exn..</Text>
                         </View>
-            </View>
+            </Card>
         );
             
 }
@@ -42,7 +44,6 @@ export default class ExpandableItem extends React.Component{
     constructor(){
         super()
         this.state = {
-            itemHeight: 60,
             showDropDown: false
         }
 
@@ -56,23 +57,22 @@ export default class ExpandableItem extends React.Component{
         console.log("Showing drop down details", this.state.showDropDown)
         this.setState( (state)=>{
             return {
-                itemHeight: (state.itemHeight==60)?300:60,
                 showDropDown:!state.showDropDown}
         })
     }
 
     render(){
         return (
-            <View style={this.props.style, { height:this.state.itemHeight}}>
-    
-                <View style={styles.visibleSection}> 
+            <>
+                <Card style={styles.visibleSection}> 
                     <TouchableOpacity style={styles.lexTopSubContainer} 
                                       onPress={()=>{this.showDropDown()} }>
-                            <Text style={styles.lexItemWordContainer} >
-                                    {this.props.nativeWord}
+                            <Text style={styles.lexItemWordContainer, {fontWeight:'bold'}} >
+                                    {this.props.lexicon.nativeWord}
                             </Text>
+                            <Divider style={{ backgroundColor: 'grey'}}></Divider>
                             <Text style={styles.lexItemWordContainer} >
-                                    {this.props.englishWord}
+                                    {this.props.lexicon.englishWord}
                             </Text>
                     </TouchableOpacity> 
     
@@ -100,16 +100,16 @@ export default class ExpandableItem extends React.Component{
                             
                     </View>
                     
-               </View>
+               </Card>
 
                { 
                    (this.state.showDropDown) ? 
                     //console.log("this.state.showDropDown dropdown", this.state.showDropDown)
-                    <DropDownDisplay word={this.props.englishWord}/>
+                    <DropDownDisplay lexicon={this.props.lexicon}/>
                    : null
                 }
     
-            </View>
+            </>
         );
     }
 }
@@ -121,17 +121,16 @@ const styles = StyleSheet.create({
 
     },
     visibleSection:{
-        borderWidth: 1,
         margin: 4,
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     expandableSection:{
-        borderWidth: 1, 
+        //borderWidth: 1, 
         overflow:'hidden', 
         backgroundColor: '#FF33'
     },
     lexTopSubContainer:{
-        borderWidth: 1,
+        //borderWidth: 1,
         marginRight: 1,
         marginBottom: 2,
         marginTop: 2,
@@ -139,12 +138,14 @@ const styles = StyleSheet.create({
 
     },
     lexItemWordContainer:{
-        borderWidth: 1,
-        marginRight: 1,
-        marginBottom: 1,
+        paddingTop: '2%',
+        marginLeft: '2.5%',
+        marginBottom: '1%',
+        fontSize: 18,
+        fontFamily: 'Cochin'
     },
     speakFavContainer:{
-        borderWidth: 1,
+        //borderWidth: 1,
         marginRight: 1,
         marginBottom: 1,
         width: '25%',
@@ -152,12 +153,12 @@ const styles = StyleSheet.create({
 
     },
     speaker:{
-        borderWidth: 1,
+        //borderWidth: 1,
         marginRight: 1,
         width: '50%',
     },
     favorite:{
-        borderWidth: 1,
+        //borderWidth: 1,
         marginRight: 1,
         width: '50%',
     },
@@ -166,12 +167,23 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         width: 170,
         height: 170
+    },
+    detailView:{
+        paddingTop: '20%'
     }, 
     words:{
-        paddingTop: 10,
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        paddingBottom: '10%'
     }, 
+    exampleUse:{
+        paddingBottom: '5%',
+        marginLeft: '2%'
+    },
+    exampleUseView:{
+        marginTop: '2%'
+    },
     nativeWord:{
-        flexWrap:'wrap'
+        flexWrap:'wrap',
+        
     },
 });

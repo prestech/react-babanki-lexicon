@@ -1,6 +1,6 @@
 [
     {
-        "kejomWord": "a ǹtèma ǹtèmə̀",
+        "nativeWord": "a ǹtèma ǹtèmə̀",
         "englishWord": " at intervals, one after the other, in stages",
         "partOfSpeech": " adv",
         "pluralForm": null,
@@ -11,7 +11,7 @@
         "label": "time"
       },
       {
-        "kejomWord": "a shèn",
+        "nativeWord": "a shèn",
         "englishWord": " here",
         "partOfSpeech": " adv",
         "pluralForm": null,
@@ -22,7 +22,7 @@
         "label": "locate"
       },
       {
-        "kejomWord": "a shə̀",
+        "nativeWord": "a shə̀",
         "englishWord": " here",
         "partOfSpeech": " adv",
         "pluralForm": null,
@@ -33,7 +33,7 @@
         "label": "locate"
       },
       {
-        "kejomWord": "a shɨ",
+        "nativeWord": "a shɨ",
         "englishWord": " in front of, before",
         "partOfSpeech": " prep",
         "pluralForm": null,
@@ -44,7 +44,7 @@
         "label": "locate"
       },
       {
-        "kejomWord": "a tin",
+        "nativeWord": "a tin",
         "englishWord": " inside",
         "partOfSpeech": " prep",
         "pluralForm": null,
@@ -55,7 +55,7 @@
         "label": "locate"
       },
       {
-        "kejomWord": "a tyi",
+        "nativeWord": "a tyi",
         "englishWord": " under, below",
         "partOfSpeech": " prep",
         "pluralForm": null,
@@ -66,7 +66,7 @@
         "label": "locate"
       },
       {
-        "kejomWord": "abè",
+        "nativeWord": "abè",
         "englishWord": " liver",
         "partOfSpeech": " n 6",
         "pluralForm": null,
@@ -77,7 +77,7 @@
         "label": "anatomy, organ"
       },
       {
-        "kejomWord": "abe a bwa’ghə",
+        "nativeWord": "abe a bwa’ghə",
         "englishWord": " lung (soft liver)",
         "partOfSpeech": " n",
         "pluralForm": null,
@@ -88,7 +88,7 @@
         "label": "anatomy, organ"
       },
       {
-        "kejomWord": "abe a bwa’zə",
+        "nativeWord": "abe a bwa’zə",
         "englishWord": "lung (soft liver)",
         "partOfSpeech": " n 6",
         "pluralForm": " abe a bwa’ghə",
@@ -99,7 +99,7 @@
         "label": "anatomy, organ"
       },
       {
-        "kejomWord": "àbìkəŋ",
+        "nativeWord": "àbìkəŋ",
         "englishWord": "lion",
         "partOfSpeech": " n 1/2",
         "pluralForm": null,
@@ -110,7 +110,7 @@
         "label": "animal, wild"
       },
       {
-        "kejomWord": "àbʉ̀mu’",
+        "nativeWord": "àbʉ̀mu’",
         "englishWord": " nine",
         "partOfSpeech": " num",
         "pluralForm": null,
@@ -121,7 +121,7 @@
         "label": "number"
       },
       {
-        "kejomWord": "àdʉ̀ ǹkamsə",
+        "nativeWord": "àdʉ̀ ǹkamsə",
         "englishWord": "exceptionally rich man, millionaire",
         "partOfSpeech": " n 1/2",
         "pluralForm": null,
@@ -132,7 +132,7 @@
         "label": "number"
       },
       {
-        "kejomWord": "àdzòŋ",
+        "nativeWord": "àdzòŋ",
         "englishWord": "plum",
         "partOfSpeech": " n 1/2",
         "pluralForm": null,
@@ -143,7 +143,7 @@
         "label": "plant, fruit"
       },
       {
-        "kejomWord": "aghʉ ənshen",
+        "nativeWord": "aghʉ ənshen",
         "englishWord": " elephantiasis",
         "partOfSpeech": " n 6",
         "pluralForm": null,
@@ -154,7 +154,7 @@
         "label":"illness"
       },
       {
-        "kejomWord": "àjùŋ",
+        "nativeWord": "àjùŋ",
         "englishWord": " day of week (3rd)",
         "partOfSpeech": " n",
         "pluralForm": null,
@@ -165,7 +165,7 @@
         "label":"day"
       },
       {
-        "kejomWord": "akwen ə mənkalə̀",
+        "nativeWord": "akwen ə mənkalə̀",
         "englishWord": " rice",
         "partOfSpeech": " n 6",
         "pluralForm": null,
@@ -176,7 +176,7 @@
         "label":"plant, grains"
       },
       {
-        "kejomWord": "àlò’",
+        "nativeWord": "àlò’",
         "englishWord": "necklace",
         "partOfSpeech": " n 1/2",
         "pluralForm": null,
@@ -187,7 +187,7 @@
         "label":"fashion"
       },
       {
-        "kejomWord": "alʉ̀’",
+        "nativeWord": "alʉ̀’",
         "englishWord": " raffia palm bush",
         "partOfSpeech": " n 6",
         "pluralForm": null,
@@ -198,7 +198,7 @@
         "label":"plant"
       },
       {
-        "kejomWord": "amfwom",
+        "nativeWord": "amfwom",
         "englishWord": "marrow",
         "partOfSpeech": " n 6",
         "pluralForm": null,
@@ -209,7 +209,7 @@
         "label":"anatomy, organ"
       },
       {
-        "kejomWord": "amfwom ə kəkwəŋ",
+        "nativeWord": "amfwom ə kəkwəŋ",
         "englishWord": "bone marrow",
         "partOfSpeech": " n 6",
         "pluralForm": " amfwom ə kəkwoŋ",

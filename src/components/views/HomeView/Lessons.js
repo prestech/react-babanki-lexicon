@@ -6,7 +6,10 @@ import {
          SafeAreaView,
          Text,
         } from 'react-native'
+import {Divider} from 'react-native-elements'
+
 import ListAdapter from '../../utility/Layout/List/ListAdapter'
+import {Card} from 'react-native-shadow-cards'
 
 export default class Lessons extends React.Component{
  
@@ -18,40 +21,53 @@ export default class Lessons extends React.Component{
                  "Intermediate II","Advance I","Advanced II"],
         }
 
-        this.extractKey = this.extractKey.bind(this);
         this.setListItems = this.setListItems.bind(this)
 
     }
 
-    setListItems(item){
-       return ( <View style={styles.listItem}>
-                    <Text style={{fontFamily:'Cochin', fontSize:20}}>{item}</Text>
-               </View>)
+    setListItems(){
+        const lessonVs = this.state.data.forEach( element =>  <Text style={{fontFamily:'Cochin', fontSize:20}}>{element}</Text>)
+        return lessonVs;
     }
-    extractKey(item){
-        return item;
-    }
-
+  
     render(){
 
         return (
-            <SafeAreaView style={this.props.style}>
-                    <Text style={{fontFamily:'Cochin', fontSize:20}}>Lessons</Text>
-                    <ListAdapter 
-                        data={this.state.data}
-                        listItem = {this.setListItems}
-                        extractKey = {this.extractKey}
-                    />
-                 
-            </SafeAreaView>
+            <>
+                <Text style={{fontFamily:'Cochin', fontSize:20}}>Lessons</Text>
+                    
+                <Card style={styles.listItem}>
+                    <Text style={{fontFamily:'Cochin', fontSize:20}}>{this.state.data[0]}</Text>
+                </Card>
+
+                <Card style={styles.listItem}>   
+                    <Text style={{fontFamily:'Cochin', fontSize:20}}>{this.state.data[1]}</Text>
+                </Card>
+                <Card style={styles.listItem}>
+                    <Text style={{fontFamily:'Cochin', fontSize:20}}>{this.state.data[2]}</Text>
+                </Card>
+
+                <Card style={styles.listItem}>
+                    <Text style={{fontFamily:'Cochin', fontSize:20}}>{this.state.data[3]}</Text>
+                </Card>
+
+                <Card style={styles.listItem}>
+                    <Text style={{fontFamily:'Cochin', fontSize:20}}>{this.state.data[4]}</Text>
+                </Card>
+
+                <Card style={styles.listItem}>
+                    <Text style={{fontFamily:'Cochin', fontSize:20}}>{this.state.data[5]}</Text>
+                </Card>
+            </>
         )
     }
 }
 
 const styles = StyleSheet.create ({
     listItem:{
+        alignSelf:'center',
         height: 50,
         backgroundColor: 'white',
-        margin: 3
+        marginBottom: 1
     }
 })

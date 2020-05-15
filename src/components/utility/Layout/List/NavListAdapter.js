@@ -8,8 +8,10 @@ import {
         }from 'react-native'
 
 import ListAdapter from './ListAdapter'
+import {Divider} from 'react-native-elements'
 
 import ExpandableItem from './ListItem'
+import { Card } from 'react-native-shadow-cards';
 
 /**
  *  -------Example-----------
@@ -52,9 +54,7 @@ export default class NavListAdapter extends React.Component{
     }
     setMainListView(item){
       return(  <ExpandableItem
-                 style={styles.lexitem}
-                 nativeWord={item.kejomWord}
-                 englishWord={item.englishWord}
+                 lexicon={item}
                  onSpeakerIconTouch={this.props.onSpeakerIconTouch}
                  onLikeIconTouch={this.props.onLikeIconTouch}
                 />
@@ -67,7 +67,10 @@ export default class NavListAdapter extends React.Component{
 
 
     setNavView(item){
-      return <Text style={styles.navItem}>{item}</Text>
+      return <>
+                <Text style={styles.navText}>{item}</Text>
+                <Divider style={{ backgroundColor: 'grey'}}></Divider>
+            </>
     }
     extractNavListKey(item){
         return ""+item;
@@ -77,7 +80,6 @@ export default class NavListAdapter extends React.Component{
         return(
             <View style={styles.container}>
                 <ListAdapter 
-                    style={styles.navList}
                     listItem={this.setNavView}
                     data = {this.props.navData}
                     extractKey={this.extractNavListKey}
@@ -88,7 +90,6 @@ export default class NavListAdapter extends React.Component{
                     extractKey = {this.extractMainListKey}
                     
                 />
-
             </View>
 
 
@@ -101,17 +102,10 @@ const styles = StyleSheet.create({
       //backgroundColor: Colors.lighter,
       flexDirection: 'row',
     },
-    navList: {
-      backgroundColor: "grey",
-      width: 20,
-      position: "absolute",
-      alignSelf: 'center',
-    },
-    navItem:{
-        paddingBottom: 2,
-    },
-    lexitem: {
-     paddingLeft: 10
+    navText: {
+        alignSelf: 'center',
+        marginBottom: '10%',
+
     },
     
   });

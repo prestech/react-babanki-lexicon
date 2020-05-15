@@ -9,6 +9,8 @@ import {
          TouchableOpacity
         } from 'react-native';
 
+import {Card} from 'react-native-shadow-cards'
+
 const imageUrl = "https://via.placeholder.com/150";
 
 export default class WordOfTheDay extends React.Component{
@@ -21,8 +23,8 @@ export default class WordOfTheDay extends React.Component{
     render(){
 
         return (
-            <View style={this.props.style}>
-                <Text style={{alignSelf:'center'}}>Word of the day</Text>
+            <Card style={this.props.style}>
+                <Text style={{alignSelf:'center', fontSize:20, fontFamily:'cochin'}}>Word of the day</Text>
                 <View style={styles.wordsImgIcon}>
                     <Image 
                         style={styles.image }
@@ -70,7 +72,7 @@ export default class WordOfTheDay extends React.Component{
                 </View>
                    
 
-            </View>
+            </Card>
         )
     }
 }
@@ -83,7 +85,8 @@ const styles = StyleSheet.create({
     },
     words:{
         paddingTop: 10,
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        fontSize: 12
     },
     nativeWord:{
         flexWrap:'wrap'

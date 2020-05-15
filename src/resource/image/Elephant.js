@@ -7,7 +7,8 @@ import Svg, {Defs, ClipPath, Path} from 'react-native-svg';
     <Svg 
         width={195.447}
         height={200.117}
-        viewBox="0 0 683.38 809.248"
+        viewBox="10 10 1230.38 30.248"
+        overflow="visible" 
         {...props}
     >
       <Defs>

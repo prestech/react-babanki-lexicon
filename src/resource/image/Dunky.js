@@ -14,8 +14,7 @@ function SvgDunky(props) {
   return (
     <Svg 
         width={195.447}
-        height={200.117}
-        viewBox="0 0 683.38 809.248"
+        height={460.117}
         {...props}
      >
       <Defs>

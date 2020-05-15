@@ -78,7 +78,7 @@ export const getComponent = (name)=>{
             return <lexSvg.Lion/>;
         case name.includes('necklace'):
             return <lexSvg.Necklace/>;
-        default : return <lexSvg.Time/>; 
+        default : return <lexSvg.Drawing/>; 
     }
 }
 
