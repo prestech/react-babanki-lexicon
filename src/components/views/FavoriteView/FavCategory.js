@@ -1,6 +1,6 @@
 import React from 'react';
 import GridAdapter from '../../utility/Layout/Grid/GridAdapter'
-import { default as Zebra } from '../../../resource/image/Wild'
+import { default as Zebra } from '../../../resource/image/Dice'
 
 import { FlatList,
          View,
@@ -8,7 +8,6 @@ import { FlatList,
          StyleSheet,
         } from 'react-native'
 
-const imagePath = 'https://via.placeholder.com/150';
 /***
  * TODO
  * --Add onPress call back methods 
@@ -36,7 +35,7 @@ export default class FavCategory extends React.Component{
     onAddItem(title){
       console.log("new category added");
       this.setState( (state)=> {
-         const dataSource = state.dataSource.push( {text:title, imageUri:imagePath});
+         const dataSource = state.dataSource.push( {text:title, imageUri:Zebra});
          return(dataSource);
       }
       , ()=> {
@@ -53,17 +52,27 @@ export default class FavCategory extends React.Component{
     }
 
     render(){
-
+      selectMode = 'none'
+      canDeleteItem = true
+      if(this.props.route.params){
+         selectMode = this.props.route.params.selectMode;
+         canDeleteItem = this.props.route.params.canDeleteItem
+      }
+      
+      
       return(
         <GridAdapter
           data={this.state.dataSource}
           canSelectItem = {true}
           onCellPressed = {(category)=>{
             console.log("Fav Category cell pressed: ["+category+"]");
-            this.props.navigation.navigate("FavList");
+            this.props.navigation.navigate("FavList",{category});
           }}
           onDeleteItem = {this.onDeleteItem}
           onAddItem = {this.onAddItem}
+          selectModeType = { (selectMode)?selectMode: 'none'}
+          canDeleteItem = {canDeleteItem}
+      
         />
       );
     }   

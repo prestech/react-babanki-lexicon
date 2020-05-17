@@ -14,7 +14,6 @@ import { FlatList,
 import GridCell from './GridCell';
 import {Icon} from 'react-native-elements'
 
-//const imagePath = require('../../../resource/citrus.jpg');
 //https://aboutreact.com/example-of-gridview-using-flatlist-in-react-native/
 
 /***
@@ -31,7 +30,8 @@ export default class GridAdapter extends React.Component{
         super(props);
         this.state = {
             selectItems: [],
-            isInSelectMode: false,
+            multiSelectMode: false,
+            singleSelectMode: false,
             imageBlurLevel: 1,
             isModalVisible: false,
             openEditRibon: false
@@ -46,21 +46,29 @@ export default class GridAdapter extends React.Component{
         this.onDeleteItem = this.onDeleteItem.bind(this);
         this.clearListOfSelectedItems = this.clearListOfSelectedItems.bind(this);
     }
+
+    static defaultProps={
+      selectModeType: 'none', //single, multi, none
+      canDeleteItem: true
+    }
+
     componentDidMount(){
-      this.setState({
-        isInSelectMode: this.props.onSelectMode
-      })
+       if(this.props.selectModeType == 'single'){
+          this.setState({
+            singleSelectMode: true
+          })
+       }
     }
     switchToSelectMode = ()=>{
       console.log("call back switchToSelectMode")
       this.setState({
-        isInSelectMode: true,
+        multiSelectMode: true,
       })
     }
     exitSelectMode(){
       console.log("Exiting select mode")
       this.setState({
-        isInSelectMode: false,
+        multiSelectMode: false,
         selectItems: [],
         openEditRibon: false
       })
@@ -68,12 +76,20 @@ export default class GridAdapter extends React.Component{
     }
     
     addToListOfSelectedItems(title){
-      console.log("adding", title, "to list of selected items");
-      this.setState( (state)=>{
-        const selectItems = state.selectItems.push(title);
-        return selectItems;
-      },
-      ()=>{console.log("selectItems: "+ this.state.selectItems)})
+      console.log("adding", title, "to list of selected items "+ this.state.singleSelectMode);
+      console.log("this.props.selectModeType: "+ this.props.selectModeType );
+      if(this.state.singleSelectMode == true){
+        this.setState({
+          selectItems: [title]
+        })
+      }
+      else{
+          this.setState( (state)=>{
+          const selectItems = state.selectItems.push(title);
+          return selectItems;
+          },
+          ()=>{console.log("selectItems: "+ this.state.selectItems)})
+      }
     }
 
     removeFromListOfSelectedItems(title){
@@ -96,13 +112,13 @@ export default class GridAdapter extends React.Component{
 
     onDeleteItem(){
       console.log("OnDelete function called...")
-      if(this.props.canSelectItem === true){
+      if(this.props.canSelectItem == true && this.props.canDeleteItem == true){
         console.log("Deleting selected items: ["+this.state.selectItems+"]")
         let selectedItemStr = this.state.selectItems.join(",");
         this.props.onDeleteItem(selectedItemStr);
 
         this.setState({
-          isInSelectMode: false,
+          multiSelectMode: false,
         })
       }
     }
@@ -135,7 +151,7 @@ export default class GridAdapter extends React.Component{
              imageUri={item.imageUri}
              text={item.text}
              switchToSelectMode={this.switchToSelectMode}
-             isInSelectMode = {this.state.isInSelectMode}
+             isInSelectMode = {this.state.multiSelectMode || this.state.singleSelectMode}
              canSelectItem = {this.props.canSelectItem}
              addToListOfSelectedItems= {this.addToListOfSelectedItems}
              removeFromListOfSelectedItems = {this.removeFromListOfSelectedItems}
@@ -206,7 +222,7 @@ export default class GridAdapter extends React.Component{
           <View style={styles.modifiers}>
          { ((this.props.canSelectItem === true &&
             this.state.openEditRibon === true) || 
-            this.state.isInSelectMode==true)?
+            this.state.multiSelectMode==true)?
              <> 
               <Icon
                   raised

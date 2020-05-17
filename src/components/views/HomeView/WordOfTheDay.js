@@ -35,7 +35,7 @@ export default class WordOfTheDay extends React.Component{
                     />
                     <View style={styles.words}>
                          {/*Is there a space tag*/}
-                        <Text style={styles.words}>{wordOfTheDay.nativeWord}</Text>
+                        <Text style={styles.nativeWord}>{wordOfTheDay.nativeWord}</Text>
                         {/*Wrap very long text*/}
                         <Text style={styles.words}>{wordOfTheDay.englishWord}</Text>
                     </View>
@@ -91,7 +91,9 @@ const styles = StyleSheet.create({
         fontSize: 12
     },
     nativeWord:{
-        flexWrap:'wrap'
+        flexWrap:'wrap',
+        fontSize: 15,
+        fontWeight:'bold'
     },
     image: {
       width: 170,

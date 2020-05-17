@@ -11,7 +11,7 @@ import { NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Categories from './Categories';
 import LexiconList from './LexiconList';
-import AddFavView from '../FavoriteView/AddFavView';
+import FavCategory from '../FavoriteView/FavCategory';
 
 const imagePath = 'https://via.placeholder.com/150';
 const stack = createStackNavigator();
@@ -32,7 +32,7 @@ export default class LexiconView extends React.Component{
         <stack.Navigator initialRouteName="Categories">
             <stack.Screen name="Categories" component={Categories} />
             <stack.Screen name="LexiconList" component={LexiconList}/>
-            <stack.Screen name="AddFavView" component={AddFavView}/>
+            <stack.Screen name="FavCategory" component={FavCategory}/>
         </stack.Navigator>
         
       );

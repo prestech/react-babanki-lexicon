@@ -10,6 +10,7 @@ import {
         } from 'react-native'
 
 import {getComponent} from '../../../utility/Service/SvgManager'
+import { black } from 'color-name'
 
 const imageUrl = "https://via.placeholder.com/150";
 
@@ -44,11 +45,14 @@ export default class ExpandableItem extends React.Component{
     constructor(){
         super()
         this.state = {
-            showDropDown: false
+            showDropDown: false,
+            favStarColor: "black"
         }
 
         this.showDropDown = this.showDropDown.bind(this);
+        this.markAsFavorite = this.markAsFavorite.bind(this);
     }
+
     static defaultProps = {
         hasDropDown:false
     }
@@ -59,6 +63,14 @@ export default class ExpandableItem extends React.Component{
             return {
                 showDropDown:!state.showDropDown}
         })
+    }
+
+    markAsFavorite(){
+        this.setState({
+           favStarColor: "orange"
+        }) 
+
+        this.props.onLikeIconTouch();
     }
 
     render(){
@@ -92,9 +104,9 @@ export default class ExpandableItem extends React.Component{
                                 <Icon
                                     name='star'
                                     type='font-awesome'
-                                    color='black' //color will change when clicked
+                                    color= {this.state.favStarColor}//color will change when clicked
                                     size={26}
-                                    onPress={this.props.onLikeIconTouch}
+                                    onPress={this.markAsFavorite}
                                 />
                         </TouchableOpacity>
                             

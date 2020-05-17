@@ -11,12 +11,14 @@ import {lexicon} from '../../utility/Service/LexiconMananger';
 
 import NavListAdapter from '../../utility/Layout/List/NavListAdapter'
 
-//place holder data
-//place holder data 
 const navData = ["A", "B", "Bv", "Ch", "D", "Dz", "E", "Ə", "Ff", "G", "Gh", 
     "I", "Ɨ", "J", "K", "L", "M", "N", "Ny", "Ŋ", "O", "Pf", 
     "S", "Sh", "T", "Ts", "U", "Ʉ", "V", "W", "Y", "Z", "Zh"]
-
+/**
+ * Get data from the database
+ *
+ * 
+ */ 
 export default class FavList extends React.Component{
     
     constructor(props){

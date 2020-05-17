@@ -28,14 +28,26 @@ import LexiconView from './src/components/views/LexiconView/LexiconView'
 import { clear } from 'sisteransi';
 import HomeView from './src/components/views/HomeView/HomeView'
 
+'use strict'
+
 import { NavigationContainer} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FavoriteView from './src/components/views/FavoriteView/FavoriteView';
+
+//let SQLite = require('react-native-sqlite-storage');
 
 const Tab = createBottomTabNavigator();
 
 
 const App: () => React$Node = () => {
+ /* SQLite.openDatabase({
+      name: 'lexicon.db',
+      createFromLocation: 1
+    },
+    ()=>{console.log('db has opened')},
+    (erro)=>{console.log('db failed to open',erro)}
+  )*/
+
   return (
 
         <NavigationContainer>
@@ -76,12 +88,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: '600',
     color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
   },
   highlight: {
     fontWeight: '700',
