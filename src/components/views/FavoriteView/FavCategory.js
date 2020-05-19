@@ -2,11 +2,17 @@ import React from 'react';
 import GridAdapter from '../../utility/Layout/Grid/GridAdapter'
 import { default as Zebra } from '../../../resource/image/Dice'
 
-import { FlatList,
-         View,
-         Image,
+import {
          StyleSheet,
-        } from 'react-native'
+         Text
+        } from 'react-native';
+
+let SQLite = require('react-native-sqlite-storage');
+
+const database = SQLite.openDatabase({name: 'lexicon.db',
+                                     createFromLocation: 1},
+                                    ()=>{console.log('db has opened')},
+                                    (erro)=>{alert('db failed to open')} );
 
 /***
  * TODO
@@ -18,36 +24,94 @@ export default class FavCategory extends React.Component{
     constructor(){
         super();
         this.state = {
-            //Place holder data
-            dataSource: [ 
-              {text:'Fav Calendar', imageUri:Zebra},
-              {text:'Fav Name', imageUri:Zebra}, 
-              {text:'Fav Food', imageUri:Zebra}, 
-              {text:'Fav Animal', imageUri:Zebra}, 
-              {text:'Fav Family', imageUri:Zebra}, 
-            ],
+            dataSource: [],
         }
 
+        this.initFavoritesFromDb = this.initFavoritesFromDb.bind(this);
+        this.addFavToDb = this.addFavToDb.bind(this);
+        this.deleteFavoriteFromDb = this.deleteFavoriteFromDb.bind(this);
         this.onAddItem = this.onAddItem.bind(this);
         this.onDeleteItem = this.onDeleteItem.bind(this);
+    }
+
+    componentDidMount(){
+
+      console.log("Componenet did mount");
+      this.initFavoritesFromDb();
+    }
+
+    deleteFavoriteFromDb(selectedItem){
+        database.transaction(tx =>{
+          let sqlStatement = "DELETE FROM category WHERE name='"+selectedItem+"'";
+          tx.executeSql(sqlStatement, [], (tx, result)=>{              
+              console.log("Deleted item "+ result);
+          }, (error)=>{
+              console.log("Errro occurred while executing sql statement \n", error)
+          });
+        })
+        //remove from memory 
+    }
+    
+    initFavoritesFromDb(){
+        database.transaction(tx =>{
+
+          tx.executeSql("SELECT * FROM category", [], (tx, result)=>{
+              
+              let dataLength = result.rows.length;
+              console.log("dataLength "+ dataLength);
+
+              if(dataLength > 0 ){
+                  let output = []
+                  for(let i = 0; i < dataLength; i++){
+                      output.push( {text:result.rows.item(i).name, 
+                                    displayObj:(<Text style={{alignSelf:'center'}}>{result.rows.item(i).name}</Text>),
+                                    showTitle: false
+                                  });
+                  }
+                  this.setState({
+                    dataSource:output
+                  },()=>console.log("fav category data init successful"))
+              }
+          }, (error)=>{
+              console.log("Errro occurred while executing sql statement \n", error)
+          });
+      });
+    }
+
+    addFavToDb(newItem){
+      database.transaction(tx =>{
+        let sqlStatement = "INSERT INTO category (name) VALUES ('"+newItem+"')";
+        console.log("Executing insert statement for: "+ newItem);
+
+        tx.executeSql(sqlStatement, [], ()=>{}, (error)=>{
+            console.log("Errro occurred while executing sql statement \n", error)
+        });
+      })
     }
 
     onAddItem(title){
       console.log("new category added");
       this.setState( (state)=> {
-         const dataSource = state.dataSource.push( {text:title, imageUri:Zebra});
+         const dataSource = state.dataSource.push( { text:title, 
+                                                      displayObj:(<Text style={{alignSelf:'center'}}>{title}</Text>),
+                                                      showTitle: false
+                                                   });
          return(dataSource);
       }
-      , ()=> {
-        console.log(this.state.dataSource);
+      ,()=> {
+          this.addFavToDb(title);
       })
     }
 
     onDeleteItem(selectedItems){
       let itemList = selectedItems.split(',');
-      console.log("FavCategory selectedItems: "+itemList);
+      console.log("Removing items from favorite: "+itemList);
       this.setState( (state)=>{
-        return{dataSource: state.dataSource.filter( (item) => !itemList.includes(item.text))}
+        return {dataSource:state.dataSource.filter( (item) => !itemList.includes(item.text))};
+      },()=> {
+        itemList.forEach(element => {
+          this.deleteFavoriteFromDb(element);
+        }); 
       })
     }
 
@@ -55,8 +119,8 @@ export default class FavCategory extends React.Component{
       selectMode = 'none'
       canDeleteItem = true
       if(this.props.route.params){
-         selectMode = this.props.route.params.selectMode;
-         canDeleteItem = this.props.route.params.canDeleteItem
+        // selectMode = this.props.route.params.selectMode;
+         //canDeleteItem = this.props.route.params.canDeleteItem
       }
       
       
@@ -79,4 +143,4 @@ export default class FavCategory extends React.Component{
 }
 const styles = StyleSheet.create({
       
-  });
+});

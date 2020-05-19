@@ -148,8 +148,7 @@ export default class GridAdapter extends React.Component{
     mapItemToView(item){
       return(
           <GridCell
-             imageUri={item.imageUri}
-             text={item.text}
+             item={item}
              switchToSelectMode={this.switchToSelectMode}
              isInSelectMode = {this.state.multiSelectMode || this.state.singleSelectMode}
              canSelectItem = {this.props.canSelectItem}

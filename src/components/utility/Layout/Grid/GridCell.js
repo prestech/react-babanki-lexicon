@@ -54,25 +54,25 @@ export default class GridCell extends React.Component{
         this.setState( {
           isSelected: true,
           imageBlurLevel: 10
-        }, ()=>this.props.addToListOfSelectedItems(this.props.text))
+        }, ()=>this.props.addToListOfSelectedItems(this.props.item.text))
         
     }
     
     selectOrUnSelect(){
         if(this.state.isSelected === false){
-            console.log("Select "+this.props.text)
+            console.log("Select "+this.props.item.text)
             this.setState( {
                 isSelected: true,
                 imageBlurLevel: 10
-            }, ()=>this.props.addToListOfSelectedItems(this.props.text))
+            }, ()=>this.props.addToListOfSelectedItems(this.props.item.text))
             
         }
         else{
-            console.log("Unselect "+this.props.text)
+            console.log("Unselect "+this.props.item.text)
             this.setState( {
                 isSelected: false,
                 imageBlurLevel: 1
-            },()=>this.props.removeFromListOfSelectedItems(this.props.text))
+            },()=>this.props.removeFromListOfSelectedItems(this.props.item.text))
             
         }
     }
@@ -84,7 +84,7 @@ export default class GridCell extends React.Component{
             this.selectOrUnSelect();
         }else{
             //open cell content
-            this.props.onPress(this.props.text);
+            this.props.onPress(this.props.item.text);
         }
     }
 
@@ -99,12 +99,10 @@ export default class GridCell extends React.Component{
                     onPress={ this.onHandlePress}
             >
                
-              <Card style={styles.image}>
-                    {this.props.imageUri}
+              <Card style={styles.cardView}>
+                    {this.props.item.displayObj}
               </Card>
-              
-              <Text style={styles.imageTitle} >{this.props.text}</Text>
-             
+              {(this.props.item.showTitle) ?<Text style={{alignSelf:'center'}}>{this.props.item.text}</Text>:null} 
           </TouchableOpacity>
         </View>);
   
@@ -116,15 +114,16 @@ const styles = StyleSheet.create({
     container:{
       justifyContent: 'center',
     },
-    imageTitle:{
+    cardTitle:{
       alignSelf: 'center',
       fontSize: 20,
       fontFamily: 'Cochin'
     },
-    image: {
+    cardView: {
       width: 100,
       height: 100,
       alignSelf:'flex-start',
+      justifyContent:'center',
       margin: 10,
     },
   });

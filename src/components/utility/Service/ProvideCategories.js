@@ -31,7 +31,8 @@ import {lexicon} from './LexiconMananger';
     return categoryList.map(element =>  {
             return ({
                 text:element.charAt(0).toUpperCase()+element.slice(1),
-                imageUri: getComponent(element)
+                displayObj: getComponent(element),
+                showTitle: true
             })
         }
     );
