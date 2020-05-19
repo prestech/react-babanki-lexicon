@@ -7,21 +7,11 @@
  */
 import React from 'react';
 import {
-  SafeAreaView,
   StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-  FlatList
 } from 'react-native';
 
 import {
-  Header,
-  LearnMoreLinks,
   Colors,
-  DebugInstructions,
-  ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import Ionicons from "react-native-vector-icons/Ionicons";
 import LexiconView from './src/components/views/LexiconView/LexiconView'
@@ -34,20 +24,10 @@ import { NavigationContainer} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FavoriteView from './src/components/views/FavoriteView/FavoriteView';
 
-//let SQLite = require('react-native-sqlite-storage');
-
 const Tab = createBottomTabNavigator();
 
-
 const App: () => React$Node = () => {
- /* SQLite.openDatabase({
-      name: 'lexicon.db',
-      createFromLocation: 1
-    },
-    ()=>{console.log('db has opened')},
-    (erro)=>{console.log('db failed to open',erro)}
-  )*/
-
+  
   return (
 
         <NavigationContainer>
