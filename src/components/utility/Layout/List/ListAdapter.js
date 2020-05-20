@@ -3,12 +3,7 @@ import React, {Component} from 'react';
 import {
             AppRegistry,
             FlatList,
-            View,
-            StyleSheet,
-            Text,
-            SafeAreaView,
-            Image,
-            TouchableOpacity
+            InteractionManager
         } from 'react-native'; 
 
 //https://stackoverflow.com/questions/56985307/react-native-vector-icon-not-working-on-current-version-0-60
@@ -28,9 +23,13 @@ export default class ListAdapter extends React.Component{
     }
 
     componentDidMount(){
-        this.setState({
-            data:this.props.data
+        
+        InteractionManager.runAfterInteractions(() => {
+            this.setState({
+                data:this.props.data
+            })
         })
+       
     }
 
     shouldComponentUpdate(nextProps, nexState){
