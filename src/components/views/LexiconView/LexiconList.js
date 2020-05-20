@@ -38,7 +38,7 @@ export default class LexiconList extends React.Component{
                     onLikeIconTouch={
                         //check if its already in favorites. If so, remove
                        ()=>  {
-                           this.props.navigation.navigate("FavCategory", {selectMode:'single', canDeleteItem:false})
+                           this.props.navigation.navigate("AddFavorite", {selectMode:'single', canDeleteItem:false})
                        }
                     }
                     onSpeakerIconTouch={ ()=>{

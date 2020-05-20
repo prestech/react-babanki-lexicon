@@ -7,13 +7,11 @@ import { FlatList,
          StyleSheet,
         } from 'react-native'
 
-import { NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Categories from './Categories';
 import LexiconList from './LexiconList';
-import FavCategory from '../FavoriteView/FavCategory';
+import AddFavorite from '../FavoriteView/AddFavorite';
 
-const imagePath = 'https://via.placeholder.com/150';
 const stack = createStackNavigator();
 /***
  * TODO
@@ -32,7 +30,7 @@ export default class LexiconView extends React.Component{
         <stack.Navigator initialRouteName="Categories">
             <stack.Screen name="Categories" component={Categories} />
             <stack.Screen name="LexiconList" component={LexiconList}/>
-            <stack.Screen name="FavCategory" component={FavCategory}/>
+            <stack.Screen name="AddFavorite" component={AddFavorite}/>
         </stack.Navigator>
         
       );
