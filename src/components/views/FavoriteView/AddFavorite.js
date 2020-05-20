@@ -121,7 +121,6 @@ export default class AddFavorite extends React.Component{
       if(this.props.route.params){
          selectMode = this.props.route.params.selectMode;
          canDeleteItem = this.props.route.params.canDeleteItem
-         lexicon = this.props.route.params.lexicon
       }
       
       return(

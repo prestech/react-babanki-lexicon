@@ -116,13 +116,6 @@ export default class FavCategory extends React.Component{
     }
 
     render(){
-      selectMode = 'none'
-      canDeleteItem = true
-      if(this.props.route.params){
-        // selectMode = this.props.route.params.selectMode;
-         //canDeleteItem = this.props.route.params.canDeleteItem
-      }
-      
       
       return(
         <GridAdapter
@@ -133,10 +126,7 @@ export default class FavCategory extends React.Component{
             this.props.navigation.navigate("FavList",{category});
           }}
           onDeleteItem = {this.onDeleteItem}
-          onAddItem = {this.onAddItem}
-          selectModeType = { (selectMode)?selectMode: 'none'}
-          canDeleteItem = {canDeleteItem}
-      
+          onAddItem = {this.onAddItem}      
         />
       );
     }   
