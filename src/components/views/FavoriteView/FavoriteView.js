@@ -28,18 +28,7 @@ export default class FavoriteView extends React.Component{
       return(
         <stack.Navigator initialRouteName="FavCategory">
             <stack.Screen name="FavCategory" component={FavCategory} />
-            <stack.Screen name="FavList" 
-              component={FavList}
-              options={{
-                headerRight: () => (
-                  <Button
-                    onPress={() => alert('This is a button!')}
-                    title="Info"
-                    color="#fff"
-                  />
-                ),
-              }}  
-            />
+            <stack.Screen name="FavList" component={FavList}/>
         </stack.Navigator>
         
       );
