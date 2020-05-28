@@ -5,6 +5,8 @@
  * @format
  * @flow strict-local
  */
+'use strict'
+
 import React from 'react';
 import {
   StyleSheet,
@@ -18,7 +20,6 @@ import LexiconView from './src/components/views/LexiconView/LexiconView'
 import { clear } from 'sisteransi';
 import HomeView from './src/components/views/HomeView/HomeView'
 
-'use strict'
 
 import { NavigationContainer} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -53,7 +54,10 @@ const App: () => React$Node = () => {
           >
             <Tab.Screen name="Home" component={HomeView}/>
             <Tab.Screen name="Lexicon" component={LexiconView}/>
-            <Tab.Screen name="Favorite" component={FavoriteView}/>
+            <Tab.Screen name="Favorite" 
+                        component={FavoriteView}
+                       
+                        />
           </Tab.Navigator>
        </NavigationContainer>
        
