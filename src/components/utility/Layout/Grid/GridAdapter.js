@@ -1,4 +1,6 @@
 import React , {Component} from 'react';
+import Modal from 'react-native-modal';
+
 import { FlatList,
          View,
          SafeAreaView,
@@ -6,10 +8,10 @@ import { FlatList,
          StyleSheet,
          Text,
          ScrollView,
-         Modal,
          TextInput,
          TouchableHighlight,
-         TouchableOpacity
+         TouchableOpacity,
+         Dimensions
         } from 'react-native'
 import GridCell from './GridCell';
 import {Icon} from 'react-native-elements'
@@ -45,6 +47,7 @@ export default class GridAdapter extends React.Component{
         this.onAddItem = this.onAddItem.bind(this);
         this.onDeleteItem = this.onDeleteItem.bind(this);
         this.clearListOfSelectedItems = this.clearListOfSelectedItems.bind(this);
+        this.toggleModal = this.toggleModal.bind(this);
     }
 
     static defaultProps={
@@ -145,6 +148,11 @@ export default class GridAdapter extends React.Component{
       
     }
 
+    toggleModal(){
+      this.setState((state) => ({
+        isModalVisible: !state.isModalVisible
+      }))
+    }
     mapItemToView(item){
       return(
           <GridCell
@@ -170,11 +178,12 @@ export default class GridAdapter extends React.Component{
 
       return(
           <Modal
-            animationType='slide'
-            transparent={true}
-            visible={this.state.isModalVisible}
+            //animationType='slide'
+            isVisible={this.state.isModalVisible}
+            onBackdropPress={()=> this.toggleModal}
+            style={styles.modal}
+            
           >
-            <View style={styles.modal} >
                 <TextInput
                   style={style=styles.modalInput}
                   onChangeText={(text)=>{
@@ -187,9 +196,7 @@ export default class GridAdapter extends React.Component{
 
                 <TouchableHighlight 
                     style={styles.createBtn}
-                    onPress={()=>{
-                      this.onAddItem( this.state.newCategoryName )
-                    }}
+                    onPress={()=>this.toggleModal}
                 >
                     <Text>Create New Category</Text>
                 </TouchableHighlight>
@@ -205,7 +212,6 @@ export default class GridAdapter extends React.Component{
                     <Text>Cancel New Category</Text>
                 </TouchableHighlight>
 
-            </View>
           </Modal>
           );
     }
@@ -305,11 +311,12 @@ const styles = StyleSheet.create({
       
     },
     modal:{
+      maxHeight: Dimensions.get('window').height/2,
       margin: 20,
       backgroundColor: "white",
       borderRadius: 20,
       padding: 35,
-      top: '40%',
+      top: '20%',
       alignItems: "center",
       shadowColor: "#000",
       shadowOffset: {
@@ -322,11 +329,12 @@ const styles = StyleSheet.create({
     },
     modalInput:{
       padding: '2%', 
-      width: '60%', 
+      width: '80%', 
       height: 40, 
       borderColor: 'gray', 
       borderWidth: 1,
-      textAlign:'center'
+      textAlign:'center',
+      borderRadius: 10,
     },
     createBtn: {
       backgroundColor: "grey",
