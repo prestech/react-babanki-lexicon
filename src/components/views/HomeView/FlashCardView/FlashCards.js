@@ -7,7 +7,7 @@ import {
          Image
         } from 'react-native'
 
-import ListAdapter from '../../utility/Layout/List/ListAdapter'
+import ListAdapter from '../../../../utility/Layout/List/ListAdapter'
 
 import {Card} from 'react-native-shadow-cards'
 

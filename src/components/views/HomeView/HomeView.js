@@ -10,7 +10,7 @@ import {
 import FreqCategories from './FreqCategories';
 import WordOfTheDay from './WordOfTheDay';
 import Lessons from './Lessons';
-import FlashCard from './FlashCards';
+import FlashCard from './FlashCardView/FlashCards';
 
 import { ScrollView } from 'react-native-gesture-handler';
 
