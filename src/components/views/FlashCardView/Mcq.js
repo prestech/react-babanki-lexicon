@@ -89,7 +89,20 @@ import {
             backgroundColor: 'white',
             maxHeight:Dimensions.get('window').height/2,
             justifyContent: 'center',
-            textAlign: 'center'
+            textAlign: 'center',
+            margin: 20,
+            borderRadius: 20,
+            padding: 35,
+            top: '20%',
+            alignItems: "center",
+            shadowColor: "#000",
+            shadowOffset: {
+                width: 0,
+                height: 2
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+            elevation: 5
         },
 
         quest:{
