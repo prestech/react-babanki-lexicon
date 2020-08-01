@@ -4,11 +4,11 @@ import {
          View,
          Text,
          StyleSheet,
-         Image
+         Image,
+         TouchableOpacity
         } from 'react-native'
 
-import ListAdapter from '../../../../utility/Layout/List/ListAdapter'
-
+import ListAdapter from '../../../utility/Layout/List/ListAdapter'
 import {Card} from 'react-native-shadow-cards'
 
 const imageUrl = "https://via.placeholder.com/150";
@@ -27,19 +27,23 @@ export default class FlashCard extends React.Component{
 
     }
 
-    setListItems(item){
-       return ( <View style={styles.listItem}>
+    setListItems(itemName){
+       return ( <TouchableOpacity 
+                    style={styles.listItem}
+                    onPress={()=>{console.log(itemName)}}
+                    >
+                    
                      <Image 
                         style={styles.image }
                         source={ {uri:imageUrl} }
                         resizeMode = 'cover'
                     />
                     
-                    <Text style={{alignSelf:'center', fontSize:15, fontFamily:'cochin'}}>{item}</Text>
-               </View>)
+                    <Text style={{alignSelf:'center', fontSize:15, fontFamily:'cochin'}}>{itemName}</Text>
+               </TouchableOpacity>)
     }
-    extractKey(item){
-        return item;
+    extractKey(itemName){
+        return itemName;
     }
 
     render(){
