@@ -127,7 +127,7 @@ export default class GridAdapter extends React.Component{
     }
     
     onAddItem(text){
-     
+      console.log("Adding new category "+text)
       new Promise( (resolve, reject)=>{
 
         if(!text){
@@ -140,19 +140,22 @@ export default class GridAdapter extends React.Component{
         this.props.onAddItem(text); 
         resolve("done");
       }).then( (result)=>{
-        this.setState({
-          isModalVisible: false,
+        this.setState( (state)=>({
+          isModalVisible: !state.isModalVisible,
           newCategoryName: ''
-        })
+        }))
+        console.log("Created new cartegory")
       });
       
     }
 
     toggleModal(){
+      console.log("Toggling modal")
       this.setState((state) => ({
         isModalVisible: !state.isModalVisible
       }))
     }
+
     mapItemToView(item){
       return(
           <GridCell
@@ -180,7 +183,7 @@ export default class GridAdapter extends React.Component{
           <Modal
             //animationType='slide'
             isVisible={this.state.isModalVisible}
-            onBackdropPress={()=> this.toggleModal}
+            onBackdropPress={()=> this.toggleModal()}
             style={styles.modal}
             
           >
@@ -196,18 +199,16 @@ export default class GridAdapter extends React.Component{
 
                 <TouchableHighlight 
                     style={styles.createBtn}
-                    onPress={()=>this.toggleModal}
+                    onPress={()=>{
+                      this.onAddItem(this.state.newCategoryName)
+                    }}
                 >
                     <Text>Create New Category</Text>
                 </TouchableHighlight>
 
                 <TouchableHighlight 
                     style={styles.cancelBtn}
-                    onPress={()=>{
-                      this.setState( {
-                          isModalVisible: false
-                      })
-                    }}
+                    onPress={()=>this.toggleModal()}
                 >
                     <Text>Cancel New Category</Text>
                 </TouchableHighlight>
