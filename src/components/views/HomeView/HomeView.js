@@ -29,18 +29,22 @@ export default class HomeView extends React.Component{
              <ScrollView> 
                 <WordOfTheDay
                     style={styles.wordOfTheDay}
+                    navigation={this.props.navigation}
                 />
 
                 <Lessons
                     style={styles.lessons}
+                    navigation={this.props.navigation}
                 />
 
                 <FlashCard
                     style={styles.flashCard}
+                    navigation={this.props.navigation}
                 />
               
                 <FreqCategories
                     style={styles.freqCategories}
+                    navigation={this.props.navigation}
                 />
             </ScrollView>
          </SafeAreaView>

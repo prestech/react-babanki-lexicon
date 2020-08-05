@@ -18,7 +18,7 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import LexiconView from './src/components/views/LexiconView/LexiconView'
 import { clear } from 'sisteransi';
-import HomeView from './src/components/views/HomeView/HomeView'
+import HomeViewNav from './src/components/views/HomeView/HomeViewNav'
 
 
 import { NavigationContainer} from '@react-navigation/native';
@@ -52,7 +52,7 @@ const App: () => React$Node = () => {
                     },
                   })}
           >
-            <Tab.Screen name="Home" component={HomeView}/>
+            <Tab.Screen name="Home" component={HomeViewNav}/>
             <Tab.Screen name="Lexicon" component={LexiconView}/>
             <Tab.Screen name="Favorite" 
                         component={FavoriteView}
