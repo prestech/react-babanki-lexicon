@@ -10,7 +10,6 @@ import {
 
 import ListAdapter from '../../../utility/Layout/List/ListAdapter'
 import {Card} from 'react-native-shadow-cards'
-import McqCard from './Mcq'
 
 const imageUrl = "https://via.placeholder.com/150";
 
@@ -33,7 +32,7 @@ export default class FlashCard extends React.Component{
                     style={styles.listItem}
                     onPress={()=>{
                         console.log(itemName)
-                        this.props.navigation.navigate("McqCard",{itemName})                    
+                        this.props.navigation.navigate("McqCard")                    
                     }}
                     >
                     

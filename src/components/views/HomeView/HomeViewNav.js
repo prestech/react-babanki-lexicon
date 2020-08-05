@@ -27,8 +27,8 @@ export default class HomeViewNav extends React.Component{
 
     render(){
       return(
-        <stack.Navigator initialRouteName="HomeView">
-            <stack.Screen name="HomeView" component={HomeView} />
+        <stack.Navigator initialRouteName="Home">
+            <stack.Screen name="Home" component={HomeView} />
             <stack.Screen name="McqCard" component={McqCard}/>
             <stack.Screen name="FlashCard" component={FlashCard}/>
         </stack.Navigator>

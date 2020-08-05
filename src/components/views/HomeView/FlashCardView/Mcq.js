@@ -1,15 +1,18 @@
-'use strict'
+//'use strict'
 
-import React, {Component, useState} from 'react'
+import React, {useState} from 'react'
 import Modal from 'react-native-modal';
 import {
     View,
     Text,
     StyleSheet,
     Image,
+    SafeAreaView,
     Dimensions
    } from 'react-native'
+   import GridAdapter from '../../../utility/Layout/Grid/GridAdapter'
 
+   const imageUrl = "https://via.placeholder.com/150";
 
    /**
     * Components
@@ -34,83 +37,87 @@ import {
     */
 
     const QuestionView = ()=>{
-        const titleText = useState("Bird's Nest");
+        const titleText = "What is the question?";
 
         return <View style={styles.quest}>
+
+                    <Image 
+                        style={styles.image }
+                        source={ {uri:imageUrl} }
+                        resizeMode = 'cover'
+                    />
+
                     <Text> {titleText}</Text> 
                </View> 
     }
 
     const AnswerView = () => {
-        const titleText = useState("Bird's Nest");
+        const [dataSource, setDataSource] = useState(["1","2","3","4"]);
+        
 
-        return <View style={styles.ans}>
-                    <Text>{titleText}</Text>
-              </View>
+        itemUiSet = ()=>{
+            uiElements = []; 
+            dataSource.forEach(element => {
+            uiElements.push( { text:element, 
+                    displayObj:(<Text style={{alignSelf:'center'}}>{element}</Text>),
+                    showTitle: false
+                 });
+            });
+
+            return uiElements
+        }
+
+        dataUi = itemUiSet()
+
+        return <View style={[styles.ans]}> 
+                    <GridAdapter
+                        data={dataUi}
+                        canSelectItem = {false}
+                        isScrollable={false}
+                        onCellPressed = {(answer)=>{
+                        console.log("Category cell pressed: ["+answer+"]");
+                        }}
+                    />
+                </View>
     }
 
     export default class McqCard extends React.Component{
 
         constructor(props){
-            super()
+            super(props)
             this.state = {
                 isVisible: true
             }
 
-            this.toggleModal = this.toggleModal.bind(this)
         }
-
-        toggleModal(){
-            this.setState((state)=>({
-                 isVisible:!state.isVisible
-            }))
+        componentDidMount(){
+            console.log("MCQ component mounted")
         }
         render(){
 
             return <>
-                <Modal
-                    style={styles.modal}
-                    isVisible={this.state.isVisible}
-                    onBackdropPress={()=>this.toggleModal()}
-                >
-
-                    <QuestionView/>
-                    <AnswerView/>
-
-                </Modal>
-                    
-            </>
+                      <QuestionView/>
+                      <AnswerView/>
+                    </>               
         }
     }
 
 
     const styles = StyleSheet.create({
-        modal:{
-            backgroundColor: 'white',
-            maxHeight:Dimensions.get('window').height/2,
-            justifyContent: 'center',
-            textAlign: 'center',
-            margin: 20,
-            borderRadius: 20,
-            padding: 35,
-            top: '20%',
-            alignItems: "center",
-            shadowColor: "#000",
-            shadowOffset: {
-                width: 0,
-                height: 2
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 3.84,
-            elevation: 5
+        
+        mainView:{
+            backgroundColor:"blue"
         },
-
         quest:{
             backgroundColor: 'white',
-            minHeight:'40%'
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center"
+            
         },
         ans:{
             backgroundColor: 'skyblue',
-            minHeight:'60%'
+            flex: 1,
+            alignSelf: 'center'
         }
     })

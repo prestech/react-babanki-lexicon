@@ -39,7 +39,6 @@ export default class GridAdapter extends React.Component{
             openEditRibon: false
         }
        
-        this.props.onSelectMode = false;
 
         this.addToListOfSelectedItems = this.addToListOfSelectedItems.bind(this);
         this.removeFromListOfSelectedItems = this.removeFromListOfSelectedItems.bind(this); 
@@ -52,7 +51,9 @@ export default class GridAdapter extends React.Component{
 
     static defaultProps={
       selectModeType: 'none', //single, multi, none
-      canDeleteItem: true
+      canDeleteItem: true,
+      isScrollable: true,
+      onSelectMode: false
     }
 
     componentDidMount(){
@@ -171,7 +172,9 @@ export default class GridAdapter extends React.Component{
     }
     groupViews(){
         return(
-        <View style={styles.container}>
+        <View style={[styles.container ]}
+        
+        >
 
           {this.props.data.map( (item, index)=>this.mapItemToView(item))}
         </View>);
@@ -221,9 +224,17 @@ export default class GridAdapter extends React.Component{
 
       return(
        <>
-          <ScrollView>
-            {this.groupViews()}
-          </ScrollView>
+        
+          { (this.props.isScrollable == true)?
+                <ScrollView>
+                    {this.groupViews()}
+                </ScrollView>
+              :(this.props.isScrollable == false) ?
+                  <>
+                    {this.groupViews()}
+                  </>
+              : null //check for nulls
+           }
           
           <View style={styles.modifiers}>
          { ((this.props.canSelectItem === true &&

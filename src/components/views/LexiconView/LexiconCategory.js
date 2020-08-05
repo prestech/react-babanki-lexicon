@@ -5,11 +5,11 @@ import {
         StyleSheet,
         } from 'react-native'
 
-import { createStackNavigator } from '@react-navigation/stack';
+//import { createStackNavigator } from '@react-navigation/stack';
 
 import {categories} from '../../utility/Service/ProvideCategories'; 
 
-const stack = createStackNavigator();
+//const stack = createStackNavigator();
 /***
  * TODO
  * --Add onPress call back methods 
