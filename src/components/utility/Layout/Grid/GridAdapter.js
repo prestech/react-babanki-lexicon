@@ -230,9 +230,9 @@ export default class GridAdapter extends React.Component{
                     {this.groupViews()}
                 </ScrollView>
               :(this.props.isScrollable == false) ?
-                  <>
+                  <ScrollView>
                     {this.groupViews()}
-                  </>
+                  </ScrollView>
               : null //check for nulls
            }
           

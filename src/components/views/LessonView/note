@@ -1,1 +1,14 @@
 https://aboutreact.com/react-native-swipeable-cardview-like-tinder/
+
+https://blog.bitsrc.io/understanding-react-default-props-5c50401ed37d
+
+/usr/local/bin/node --inspect-brk=40030 'src/components/views/HomeView/HomeView copy.js' 
+Debugger listening on ws://127.0.0.1:40030/9c43755c-fb45-49c3-8285-355efd81889c
+For help, see: https://nodejs.org/en/docs/inspector
+Debugger attached.
+(node:23063) Warning: To load an ES module, set "type": "module" in the package.json or use the .mjs extension.
+(Use `node --trace-warnings ...` to show where the warning was created)
+warning.js:33
+/Users/presleymuwan/projects/mobile/react/babankiLexicon/src/components/views/HomeView/HomeView copy.js:1
+import React from 'react';
+^^^^^^

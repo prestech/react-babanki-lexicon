@@ -127,6 +127,7 @@ export default class AddFavorite extends React.Component{
         <GridAdapter
           data={this.state.dataSource}
           canSelectItem = {true}
+          isScrollable={true}
           onCellPressed = {(category)=>{
             console.log("Fav Category cell pressed: ["+category+"]");
             this.props.navigation.navigate("FavList",{category});
