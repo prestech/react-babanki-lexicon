@@ -31,11 +31,7 @@ export default class HomeView extends React.Component{
                     style={styles.wordOfTheDay}
                     navigation={this.props.navigation}
                 />
-
-                <Lessons
-                    style={styles.lessons}
-                    navigation={this.props.navigation}
-                />
+               
 
                 <FlashCard
                     style={styles.flashCard}

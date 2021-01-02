@@ -34,43 +34,45 @@ export default class WordOfTheDay extends React.Component{
                         resizeMode = 'cover'
                     />
                     <View style={styles.words}>
-                         {/*Is there a space tag*/}
-                        <Text style={styles.nativeWord}>{wordOfTheDay.nativeWord}</Text>
-                        {/*Wrap very long text*/}
-                        <Text style={styles.words}>{wordOfTheDay.englishWord}</Text>
-                    </View>
+                        <Icon
+                            name='volume-up'
+                            type='font-awesome'
+                            color='black' //color will change when clicked 
+                            size={26}
+                            onPress={() => console.log('pronounce word')}
+                        />
 
-
-                    <View style={styles.speakFavContainer}>
+                         {/*Is  {wordOfTheDay.nativeWord} there a space tag*/}
+                        <Text style={styles.nativeWord}>{"Native word"}</Text>
                         
-                        <TouchableOpacity style={styles.speaker}>
-                                <Icon
-                                    name='volume-up'
-                                    type='font-awesome'
-                                    color='black' //color will change when clicked 
-                                    size={26}
-                                    onPress={() => console.log('pronounce word')}
-                                />
-                        </TouchableOpacity>  
-        
-                        <TouchableOpacity style={styles.speaker}>
-                                <Icon
-                                    name='star'
-                                    type='font-awesome'
-                                    color='black' //color will change when clicked
-                                    size={26}
-                                    onPress={() => console.log('star fav')}
-                                />
-                        </TouchableOpacity>
-                            
+
+                        <Icon
+                            name='star'
+                            type='font-awesome'
+                            color='black' //color will change when clicked
+                            size={26}
+                            onPress={() => console.log('star fav')}
+                        />
+
                     </View>
 
+                    {/*Wrap {wordOfTheDay.englishWord} very long text*/}
+                    <Text style={styles.foriegnWord}>{"Foriegn word"}</Text>
+                    
                 </View>
 
-                <View style={{paddingHorizontal: 25}}>
-                    <Text>(ex.1)</Text>
-                    <Text>(ex.2)</Text>
-                    <Text>(ex.3)</Text>
+                <View style={{paddingHorizontal: 25, flexDirection:'row', justifyContent:'center', marginTop: '10%', marginBottom: '5%'}}>
+
+                    <Text style={{color:'gray',  fontSize:20}} >Ex</Text>
+                    <View style= {{borderColor:'black', borderRightWidth: 1, margin: 4}}/>
+
+                    <View>
+                        <Text style={{color:'black', fontSize:16, marginBottom: 10}}>Example use of how to use the native word we are looking at in the picture</Text>
+
+                        <Text style={{color:'grey'}} >Example use of how to use the native word we are looking at in the picture</Text>
+                    </View>
+                    
+
                 </View>
                    
 
@@ -82,33 +84,36 @@ export default class WordOfTheDay extends React.Component{
 
 const styles = StyleSheet.create({
     wordsImgIcon:{
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'space-evenly'
     },
     words:{
         paddingTop: 10,
         flexWrap: 'wrap',
-        fontSize: 12
+        fontSize: 12,
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center'
     },
     nativeWord:{
         flexWrap:'wrap',
         fontSize: 15,
-        fontWeight:'bold'
+        fontWeight:'bold',
+        marginTop: 3,
+        marginHorizontal: 20
+    },
+    foriegnWord:{
+        flexWrap:'wrap',
+        fontSize: 15,
+        marginTop: 3,
+        marginHorizontal: 20,
+        alignSelf: 'center'
     },
     image: {
-      width: 170,
-      height: 170,
-      alignSelf:'flex-start',
-      margin: 10,
-
-    }, speakFavContainer:{
-        borderWidth: 1,
-        marginRight: 1,
-        marginBottom: 1,
-        width: '15%',
-        alignSelf: 'center',
-        flexDirection:'row-reverse',
-        justifyContent: 'flex-end'
+      width: 250,
+      height: 200,
+      alignSelf:'center',
+      margin: 10
     },
     speaker:{
         borderWidth: 1,
