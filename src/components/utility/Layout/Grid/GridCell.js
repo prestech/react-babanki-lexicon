@@ -11,8 +11,6 @@ import { FlatList,
 
 import {Card} from 'react-native-shadow-cards'
 
-import { default as Zebra } from '../../../../resource/image/Zebra'
-
 /**
  * TODO
  * Each Grid will have an 'Edit' UI to eidt the name when in edit mode
