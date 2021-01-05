@@ -9,7 +9,7 @@ import {
 
 import FreqCategories from './FreqCategories';
 import WordOfTheDay from './WordOfTheDay';
-import Lessons from './Lessons';
+import Personalized from './personalizedUpdates';
 import FlashCard from './FlashCardView/FlashCards';
 
 import { ScrollView } from 'react-native-gesture-handler';
@@ -31,11 +31,11 @@ export default class HomeView extends React.Component{
                     style={styles.wordOfTheDay}
                     navigation={this.props.navigation}
                 />
-
-                <Lessons
-                    style={styles.lessons}
+               
+               {/*<Personalized
+                    style={styles.wordOfTheDay}
                     navigation={this.props.navigation}
-                />
+               />*/}
 
                 <FlashCard
                     style={styles.flashCard}

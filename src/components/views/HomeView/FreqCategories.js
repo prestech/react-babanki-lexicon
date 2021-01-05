@@ -72,7 +72,7 @@ const styles = StyleSheet.create ({
           height: 100,
           alignSelf:'flex-start',
           margin: 10,
-          borderRadius: 65
+          borderRadius: 10
         },
     
 })

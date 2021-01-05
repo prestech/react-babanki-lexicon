@@ -1,6 +1,5 @@
 import React from 'react';
 import GridAdapter from '../../utility/Layout/Grid/GridAdapter'
-import { default as Zebra } from '../../../resource/image/Dice'
 
 import {
          StyleSheet,
