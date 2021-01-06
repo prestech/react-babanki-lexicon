@@ -45,6 +45,14 @@ import {
         const titleText = "What is the question?";
 
         return <View style={styles.quest}>
+                    <Text style={styles.questText}> {titleText}</Text> 
+            </View> 
+    }
+
+    const QuestionViewWithImage = ()=>{
+        const titleText = "What is the question?";
+
+        return <View style={styles.quest}>
                     <View style={styles.quest_img}>
                         <Image  style={styles.image}
                                 source={require('../../../../resource/img/rooster.png')}
@@ -64,6 +72,84 @@ import {
                 </View>
     }
 
+    const AnswerViewMatchWordAndImage = (props) => {
+        
+        localStyle = StyleSheet.create({
+            wordContainer:{
+               flex: 1,
+               height: '50%',
+               width: '100%',
+               marginHorizontal: '1%',
+               alignSelf:'center'
+            },
+            imgContainer:{
+                flex: 1,
+                height: '100%',
+                width: '100%',
+                marginHorizontal: '1%',
+                alignSelf:'center'
+             },
+            container:{
+                flex: 1,
+                height: '100%',
+                width: '100%',
+                flexDirection:'row',
+                marginBottom: '1%',
+                justifyContent:'space-evenly'
+            }
+             
+        })
+        return <View style={styles.ansView}> 
+                    {props.dataSource.map(element => ( 
+                                <View style={localStyle.container}> 
+                                    <Card style={localStyle.imgContainer}>
+                                        <Image  style={styles.image}
+                                                source={require('../../../../resource/img/rooster.png')}
+                                                resizeMode='contain'/>
+                                    </Card>
+                                    
+                                    <Card style={localStyle.wordContainer}>
+                                        <Text key={element}>{element}</Text>
+                                    </Card>
+                                </View> 
+                            )
+                        )
+                    } 
+                </View>
+    }
+
+    const AnswerViewWithImage = (props) => {
+        
+        localStyle = StyleSheet.create({
+            imgContainer:{
+                height: '40%',
+                width: '48%',
+                marginHorizontal: '1%'
+             },
+            container:{
+                height: '100%',
+                width: '100%',
+                flex: 1,
+                justifyContent:'space-around',
+                flexDirection:'column',
+                flexWrap: 'wrap',
+                backgroundColor: 'white',
+            }
+             
+        })
+        return <View style={localStyle.container}> 
+                    {props.dataSource.map(element => ( 
+                                <Card style={localStyle.imgContainer}>
+                                    <Image  style={styles.image}
+                                            source={require('../../../../resource/img/rooster.png')}
+                                            resizeMode='contain'/>
+                                </Card>
+                            )
+                        )
+                    } 
+                </View>
+    }
+
     export default class McqCard extends React.Component{
 
         constructor(props){
@@ -80,7 +166,7 @@ import {
 
             return <>
                       <QuestionView/>
-                      <AnswerView
+                      <AnswerViewWithImage
                         dataSource={["lion","bird","zebra","basket"]}
                       />
                     </>               
@@ -99,16 +185,15 @@ import {
         quest_img:{
             height: '60%',
             width: '40%',
-            backgroundColor:'green'
+            backgroundColor:'red'
         },
         questText:{
             fontSize:20
         },
         image: {
-            flex: 1,
-            alignSelf:'stretch',
-            width: undefined,
-            height: undefined,
+            alignSelf:'center',
+            width: '100%',
+            height: '100%',
         },
         ans:{
             backgroundColor: 'white',
