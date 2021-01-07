@@ -30,7 +30,9 @@ export default class CardResolver extends React.Component{
             show progress bar [20 flash card for each session]
         */
         super();
-        this.state = {}
+        this.state = {
+            correctAns:null
+        }
     
     }
 
@@ -41,7 +43,9 @@ export default class CardResolver extends React.Component{
     showPrevCard=()=>{
 
     }
+    validateResponse=(userAns, viewType)=>{
 
+    }
     render(){
         return( <>
                     <View style={{height: '5%', backgroundColor:'grey', justifyContent: 'center'}}>
