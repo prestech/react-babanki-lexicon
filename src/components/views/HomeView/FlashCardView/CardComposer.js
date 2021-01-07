@@ -41,7 +41,7 @@ import {
     *  What do you read? 
     *  Tap the matching pair
     */
-    const QuestionView = ()=>{
+    const TextQuestionView = ()=>{
         const titleText = "What is the question?";
 
         return <View style={styles.quest}>
@@ -62,7 +62,7 @@ import {
                </View> 
     }
 
-    const AnswerView = (props) => {
+    const TextAnswerView = (props) => {
         
         return <View style={[styles.ansView]}> 
                     {props.dataSource.map(element => ( 
@@ -150,7 +150,32 @@ import {
                 </View>
     }
 
-    export default class McqCard extends React.Component{
+    export const VIEW_TYPES = {
+        QUEST_VIEW_WITH_IMAGE: 'QUEST_VIEW_WITH_IMAGE',
+        TEXT_QUEST_VIEW: 'TEXT_QUEST_VIEW',
+        ANS_VIEW_WITH_IMAGE:'ANS_VIEW_WITH_IMAGE',
+        ANS_VIEW_MATCH_TEX_IMAGE: 'ANS_VIEW_MATCH_TEX_IMAGE',
+        TEXT_ANS_VIEW: 'TEXT_ANS_VIEW'
+    }
+
+    resolveQuestionView = (viewType) => {
+        if(viewType == VIEW_TYPES.QUEST_VIEW_WITH_IMAGE){
+            return QuestionViewWithImage
+        }else {
+            return TextQuestionView
+        }
+    }
+
+    resolveAnswerView = (viewType) => {
+        if(viewType == VIEW_TYPES.ANS_VIEW_WITH_IMAGE){
+            return AnswerViewWithImage
+        }else if(viewType == VIEW_TYPES.ANS_VIEW_MATCH_TEX_IMAGE){
+            return AnswerViewMatchWordAndImage
+        }else {
+            return TextAnswerView
+        }
+    }
+    export default class CardComposer extends React.Component{
 
         constructor(props){
             super(props)
@@ -163,10 +188,13 @@ import {
             console.log("MCQ component mounted")
         }
         render(){
-
+            QuestionView = resolveQuestionView(this.props.questViewType)
+            AnswerView = resolveAnswerView(this.props.ansViewType)
+            
             return <>
-                      <QuestionView/>
-                      <AnswerViewWithImage
+                    <QuestionView/>
+                    
+                    <AnswerView
                         dataSource={["lion","bird","zebra","basket"]}
                       />
                     </>               

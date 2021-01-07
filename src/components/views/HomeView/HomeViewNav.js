@@ -10,7 +10,7 @@ import { FlatList,
 import { createStackNavigator } from '@react-navigation/stack';
 import FlashCard from  './FlashCardView/FlashCards';
 import HomeView from  './HomeView';
-import McqCard from './FlashCardView/Mcq';
+import CardResolver from './FlashCardView/CardResolver';
 
 const stack = createStackNavigator();
 /***
@@ -29,7 +29,7 @@ export default class HomeViewNav extends React.Component{
       return(
         <stack.Navigator initialRouteName="Home">
             <stack.Screen name="Home" component={HomeView} />
-            <stack.Screen name="McqCard" component={McqCard}/>
+            <stack.Screen name="CardResolver" component={CardResolver}/>
             <stack.Screen name="FlashCard" component={FlashCard}/>
         </stack.Navigator>
         
