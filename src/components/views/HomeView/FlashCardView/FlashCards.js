@@ -32,7 +32,7 @@ export default class FlashCard extends React.Component{
                     style={styles.listItem}
                     onPress={()=>{
                         console.log(itemName)
-                        this.props.navigation.navigate("McqCard")                    
+                        this.props.navigation.navigate("CardResolver")                    
                     }}
                     >
                     
