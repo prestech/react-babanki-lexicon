@@ -7,7 +7,7 @@ import {
     Text,
     StyleSheet,
     Image,
-    SafeAreaView,
+    TouchableOpacity,
     Dimensions
    } from 'react-native'
    import {Card} from 'react-native-shadow-cards'
@@ -44,30 +44,33 @@ import {
     const TextQuestionView = ()=>{
         const titleText = "What is the question?";
 
-        return <View style={styles.quest}>
+        return <Card style={styles.quest}>
                     <Text style={styles.questText}> {titleText}</Text> 
-            </View> 
+            </Card> 
     }
 
     const QuestionViewWithImage = ()=>{
         const titleText = "What is the question?";
 
-        return <View style={styles.quest}>
+        return <Card style={styles.quest}>
                     <View style={styles.quest_img}>
                         <Image  style={styles.image}
                                 source={require('../../../../resource/img/rooster.png')}
                                 resizeMode='cover'/>
                     </View>
                     <Text style={styles.questText}> {titleText}</Text> 
-               </View> 
+               </Card> 
     }
 
     const TextAnswerView = (props) => {
         
         return <View style={[styles.ansView]}> 
                     {props.dataSource.map(element => ( 
-                            <Card style={[styles.ans]}> 
-                                <Text key={element}> {element} </Text>
+                            <Card style={styles.ans}>
+                                 <TouchableOpacity style={styles.ans}>
+                                    <Text key={element}> {element} </Text>
+                                 </TouchableOpacity>
+                                
                             </Card> ))} 
                 </View>
     }
@@ -101,15 +104,20 @@ import {
         })
         return <View style={styles.ansView}> 
                     {props.dataSource.map(element => ( 
-                                <View style={localStyle.container}> 
+                                <View style={localStyle.container}>
+
                                     <Card style={localStyle.imgContainer}>
-                                        <Image  style={styles.image}
-                                                source={require('../../../../resource/img/rooster.png')}
-                                                resizeMode='contain'/>
+                                        <TouchableOpacity style={localStyle.imgContainer}>
+                                            <Image  style={styles.image}
+                                                    source={require('../../../../resource/img/rooster.png')}
+                                                    resizeMode='contain'/>
+                                        </TouchableOpacity>
                                     </Card>
                                     
                                     <Card style={localStyle.wordContainer}>
-                                        <Text key={element}>{element}</Text>
+                                        <TouchableOpacity style={localStyle.wordContainer}> 
+                                            <Text key={element}>{element}</Text>
+                                        </TouchableOpacity>
                                     </Card>
                                 </View> 
                             )
@@ -140,9 +148,12 @@ import {
         return <View style={localStyle.container}> 
                     {props.dataSource.map(element => ( 
                                 <Card style={localStyle.imgContainer}>
-                                    <Image  style={styles.image}
-                                            source={require('../../../../resource/img/rooster.png')}
-                                            resizeMode='contain'/>
+                                    <TouchableOpacity style={localStyle.imgContainer}>
+                                        <Image  style={styles.image}
+                                                source={require('../../../../resource/img/rooster.png')}
+                                                resizeMode='contain'/>
+                                    </TouchableOpacity>
+                                    
                                 </Card>
                             )
                         )
@@ -207,7 +218,10 @@ import {
         quest:{
             backgroundColor: 'white',
             height: '40%',
-            alignItems: "center",
+            width: '98%',
+            margin: '1%',
+            alignSelf: "center",
+            alignItems:'center',
             justifyContent: "center"            
         },
         quest_img:{

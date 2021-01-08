@@ -48,15 +48,33 @@ export default class CardResolver extends React.Component{
     }
     render(){
         return( <>
-                    <View style={{height: '5%', backgroundColor:'grey', justifyContent: 'center'}}>
-                        <Text style={{alignSelf:'center', fontSize:20}}>{"12/14"}</Text>
-                    </View>
+                    <Card style={styles.count}>
+                        <Text style={{alignSelf:'center', fontSize:20}}>{"1 of 20"}</Text>
+                        <Text style={{alignSelf:'center', fontSize:20}}>{"correct: 2"}</Text>
+                        <Text style={{alignSelf:'center', fontSize:20}}>{"wrong: 0"}</Text>
+                    </Card>
                     
                     <CardComposer 
-                        questViewType={VIEW_TYPES.TEXT_QUEST_VIEW}
-                        ansViewType={VIEW_TYPES.ANS_VIEW_MATCH_TEX_IMAGE}
+                        questViewType={VIEW_TYPES.QUEST_VIEW_WITH_IMAGE}
+                        ansViewType={VIEW_TYPES.TEXT_ANS_VIEW}
                     />
                 </>
         )
     }
 }
+
+
+const styles = StyleSheet.create({
+
+    count:{
+        height: '5%', 
+        width: '98%',
+        backgroundColor:'white',
+        flexDirection:'row',
+        justifyContent: 'space-around',
+        alignSelf: 'center'
+        
+    }
+    
+
+})
