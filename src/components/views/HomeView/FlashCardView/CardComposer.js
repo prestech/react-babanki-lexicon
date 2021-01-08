@@ -67,7 +67,7 @@ import {
         return <View style={[styles.ansView]}> 
                     {props.dataSource.map(element => ( 
                             <Card style={styles.ans}>
-                                 <TouchableOpacity style={styles.ans}>
+                                 <TouchableOpacity style={styles.touchableView}>
                                     <Text key={element}> {element} </Text>
                                  </TouchableOpacity>
                                 
@@ -107,7 +107,7 @@ import {
                                 <View style={localStyle.container}>
 
                                     <Card style={localStyle.imgContainer}>
-                                        <TouchableOpacity style={localStyle.imgContainer}>
+                                        <TouchableOpacity style={styles.touchableView}>
                                             <Image  style={styles.image}
                                                     source={require('../../../../resource/img/rooster.png')}
                                                     resizeMode='contain'/>
@@ -115,7 +115,7 @@ import {
                                     </Card>
                                     
                                     <Card style={localStyle.wordContainer}>
-                                        <TouchableOpacity style={localStyle.wordContainer}> 
+                                        <TouchableOpacity style={styles.touchableView}> 
                                             <Text key={element}>{element}</Text>
                                         </TouchableOpacity>
                                     </Card>
@@ -148,7 +148,7 @@ import {
         return <View style={localStyle.container}> 
                     {props.dataSource.map(element => ( 
                                 <Card style={localStyle.imgContainer}>
-                                    <TouchableOpacity style={localStyle.imgContainer}>
+                                    <TouchableOpacity style={styles.touchableView}>
                                         <Image  style={styles.image}
                                                 source={require('../../../../resource/img/rooster.png')}
                                                 resizeMode='contain'/>
@@ -250,5 +250,11 @@ import {
             backgroundColor: 'white',
             flex: 1,
             width: '100%'
+        },
+        touchableView:{
+            height: '100%',
+            width: '100%',
+            justifyContent:'center',
+            alignItems:'center'
         }
     })
