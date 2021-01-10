@@ -53,13 +53,10 @@ export default class HomeView extends React.Component{
 }
 
 const styles = StyleSheet.create({
-    container:{
-        flex: 1,
-    },
     wordOfTheDay:{
         backgroundColor: 'white',
         alignSelf:'center',
-        marginBottom: '2%'
+        marginVertical: '2%'
         //flex: 2
     },
     freqCategories:{
