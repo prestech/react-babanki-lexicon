@@ -56,7 +56,7 @@ import {
                     <View style={styles.quest_img}>
                         <Image  style={styles.image}
                                 source={require('../../../../resource/img/rooster.png')}
-                                resizeMode='cover'/>
+                                resizeMode='contain'/>
                     </View>
                     <Text style={styles.questText}> {titleText}</Text> 
                </Card> 
@@ -227,7 +227,7 @@ import {
         quest_img:{
             height: '60%',
             width: '40%',
-            backgroundColor:'red'
+            backgroundColor:'white'
         },
         questText:{
             fontSize:20

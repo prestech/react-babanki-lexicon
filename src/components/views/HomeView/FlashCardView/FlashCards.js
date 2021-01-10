@@ -53,7 +53,7 @@ export default class FlashCard extends React.Component{
 
         return (
             <>
-                <Text style={{fontFamily:'Cochin', fontSize:20, marginTop: '2%'}}>Flashcards</Text>
+                <Text style={{fontFamily:'Cochin', fontSize:20, marginTop: '2%', alignSelf:'center'}}>Flashcards</Text>
 
                 <Card style={this.props.style}>
                     
@@ -79,13 +79,15 @@ const styles = StyleSheet.create ({
     image: {
           width: 100,
           height: 100,
-          alignSelf:'flex-start',
+          alignSelf:'center',
           margin: 10,
           borderRadius: 10
         },
     
     list: {
         flexGrow: 1, 
-        justifyContent:'center'
+        justifyContent:'space-around',
+        backgroundColor: 'white'
+
     }
 })

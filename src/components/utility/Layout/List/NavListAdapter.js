@@ -104,7 +104,8 @@ const styles = StyleSheet.create({
     },
     navText: {
         alignSelf: 'center',
-        marginBottom: '10%',
+        marginVertical: '10%',
+
 
     },
     

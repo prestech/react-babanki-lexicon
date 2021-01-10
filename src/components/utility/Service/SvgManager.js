@@ -19,7 +19,7 @@ export const getComponent = (name)=>{
     switch(true){
         default : return <Image style={styles.tinyLogo}
                                 source={require('../../../resource/img/rooster.png')}
-                                resizeMode='center'/>; 
+                                resizeMode='contain'/>; 
     }
 }
 

@@ -45,11 +45,12 @@ export default class FreqCategories extends React.Component{
 
         return (
             <>
-               <Text style={{fontFamily:'Cochin', fontSize:20}}>Cultural</Text>
+               <Text style={{fontFamily:'Cochin', fontSize:20, alignSelf:'center' }}>Cultural</Text>
 
                 <Card style={this.props.style}>
                     
                         <ListAdapter 
+                            contentContainerStyle={styles.list}
                             data={this.state.data}
                             listItem = {this.setListItems}
                             extractKey = {this.extractKey}
@@ -65,14 +66,19 @@ export default class FreqCategories extends React.Component{
 const styles = StyleSheet.create ({
     listItem:{
         backgroundColor: 'white',
-        margin: 1,
+        margin: 1
     },   
     image: {
           width: 100,
           height: 100,
-          alignSelf:'flex-start',
+          alignSelf:'center',
           margin: 10,
           borderRadius: 10
         },
+    list: {
+        flexGrow: 1, 
+        justifyContent:'space-around',
+        backgroundColor: 'white'
+    }
     
 })

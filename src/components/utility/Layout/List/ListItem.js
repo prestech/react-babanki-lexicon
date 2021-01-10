@@ -19,10 +19,13 @@ const imageUrl = "https://via.placeholder.com/150";
         return (
                  <Card style={{ marginLeft:'1.5%'}}>
                         <View style={styles.wordsImgIcon}>
-                            {getComponent(props.lexicon.englishWord)}
+                            <Card style={{marginLeft: '5%', marginTop:'2%', marginRight:'2%', height: '100%', width: '50%%'}}>
+                                {getComponent(props.lexicon.englishWord)}
+                            </Card>
+
                             <View style={styles.detailView}>
                                  {/*Is there a space tag*/}
-                                 <Text style={styles.words}>Phonetic: {props.lexicon.pronunciation}</Text>
+                                 <Text style={styles.words}>Ph: {props.lexicon.pronunciation}</Text>
                                  <Text style={styles.words}>Sp: {props.lexicon.partOfSpeech}</Text>
                                  <Text style={styles.words}>Pl: { (props.lexicon.pluralForm)?props.lexicon.pluralForm: "?"}</Text>
                                  <Text style={styles.words}>Var: { (props.lexicon.variant)?props.lexicon.variant: "?"}</Text>
@@ -31,10 +34,18 @@ const imageUrl = "https://via.placeholder.com/150";
             
                         </View>
 
-                        <View style={styles.exampleUseView}>
-                            <Text style={styles.exampleUse}>Ex1</Text>
-                            <Text style={styles.exampleUse}>Ex2</Text>
-                            <Text style={styles.exampleUse}>Exn..</Text>
+                        <View style={{paddingHorizontal: '2%', flexDirection:'row', justifyContent:'center', marginTop: '5%', marginBottom: '1%'}}>
+
+
+                            <View>
+                                <Text style={{color:'gray',  fontSize:15}}>[Example use]</Text>
+
+                                <Text style={{color:'black', fontSize:16, marginBottom: 10}}>Example use of how to use the native word we are looking at in the picture</Text>
+
+                                <Text style={{color:'grey'}} >Example use of how to use the native word we are looking at in the picture</Text>
+                            </View>
+
+
                         </View>
             </Card>
         );
@@ -133,7 +144,7 @@ const styles = StyleSheet.create({
 
     },
     visibleSection:{
-        margin: 4,
+        margin: '1%',
         flexDirection: 'row',
     },
     expandableSection:{
@@ -177,22 +188,23 @@ const styles = StyleSheet.create({
     wordsImgIcon:{
         flexDirection: 'row',
         justifyContent: 'flex-start',
-        width: 170,
+        backgroundColor:'white',
+        width: '100%',
         height: 170
     },
     detailView:{
-        paddingTop: '20%'
+        paddingTop: '2%',
+        justifyContent:'space-evenly'
     }, 
     words:{
         flexWrap: 'wrap',
-        paddingBottom: '10%'
     }, 
     exampleUse:{
         paddingBottom: '5%',
         marginLeft: '2%'
     },
     exampleUseView:{
-        marginTop: '2%'
+        marginTop: '5%'
     },
     nativeWord:{
         flexWrap:'wrap',
