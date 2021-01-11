@@ -41,21 +41,24 @@ import {
     *  What do you read? 
     *  Tap the matching pair
     */
-    const TextQuestionView = ()=>{
-        const titleText = "What is the question?";
+    const TextQuestionView = (props)=>{
+        const titleText = props.content;
 
         return <Card style={styles.quest}>
                     <Text style={styles.questText}> {titleText}</Text> 
             </Card> 
     }
 
-    const QuestionViewWithImage = ()=>{
-        const titleText = "What is the question?";
-
+    /**
+     * input: props.content[question, imageurl]
+     */
+    const QuestionViewWithImage = (props)=>{
+        const titleText = props.content.text;
+        imageurl = props.content.imageurl
         return <Card style={styles.quest}>
                     <View style={styles.quest_img}>
                         <Image  style={styles.image}
-                                source={require('../../../../resource/img/rooster.png')}
+                                source={imageurl}
                                 resizeMode='contain'/>
                     </View>
                     <Text style={styles.questText}> {titleText}</Text> 
@@ -63,9 +66,9 @@ import {
     }
 
     const TextAnswerView = (props) => {
-        
+        options = props.content.options
         return <View style={[styles.ansView]}> 
-                    {props.dataSource.map(element => ( 
+                    {options.map(element => ( 
                             <Card style={styles.ans}>
                                  <TouchableOpacity style={styles.touchableView}>
                                     <Text key={element}> {element} </Text>
@@ -103,7 +106,7 @@ import {
              
         })
         return <View style={styles.ansView}> 
-                    {props.dataSource.map(element => ( 
+                    {props.content.map(element => ( 
                                 <View style={localStyle.container}>
 
                                     <Card style={localStyle.imgContainer}>
@@ -146,7 +149,7 @@ import {
              
         })
         return <View style={localStyle.container}> 
-                    {props.dataSource.map(element => ( 
+                    {props.content.map(element => ( 
                                 <Card style={localStyle.imgContainer}>
                                     <TouchableOpacity style={styles.touchableView}>
                                         <Image  style={styles.image}
@@ -191,7 +194,8 @@ import {
         constructor(props){
             super(props)
             this.state = {
-                isVisible: true
+                isVisible: true,
+                content: {}
             }
 
         }
@@ -203,10 +207,12 @@ import {
             AnswerView = resolveAnswerView(this.props.ansViewType)
             
             return <>
-                    <QuestionView/>
+                    <QuestionView
+                        content={this.props.question}
+                    />
                     
                     <AnswerView
-                        dataSource={["lion","bird","zebra","basket"]}
+                        content={this.props.answer}
                       />
                     </>               
         }

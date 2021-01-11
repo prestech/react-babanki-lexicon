@@ -43,6 +43,10 @@ export default class CardResolver extends React.Component{
     showPrevCard=()=>{
 
     }
+
+    generateQuestion=(questViewType, ansViewType)=>{
+        //image-optioned answers will only use text or text audio question view
+    }
     validateResponse=(userAns, viewType)=>{
 
     }
@@ -57,6 +61,8 @@ export default class CardResolver extends React.Component{
                     <CardComposer 
                         questViewType={VIEW_TYPES.QUEST_VIEW_WITH_IMAGE}
                         ansViewType={VIEW_TYPES.TEXT_ANS_VIEW}
+                        question={{text:"here is question for ya?", imageurl:require('../../../../resource/img/rooster.png') }} 
+                        answer={ {options:["chicken", "fish", "lion", "house"], correct:[]}}
                     />
                 </>
         )
@@ -72,7 +78,8 @@ const styles = StyleSheet.create({
         backgroundColor:'white',
         flexDirection:'row',
         justifyContent: 'space-around',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        marginTop:'1%'
         
     }
     

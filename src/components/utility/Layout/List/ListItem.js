@@ -6,13 +6,15 @@ import {
         Text,
         View,
         TouchableOpacity,
+        Dimensions,
         Image
         } from 'react-native'
-
 import {getComponent} from '../../../utility/Service/SvgManager'
 import { black } from 'color-name'
 
 const imageUrl = "https://via.placeholder.com/150";
+
+const windowHeight = Dimensions.get('window').height;
 
  const DropDownDisplay = (props)=>{
 
@@ -38,7 +40,9 @@ const imageUrl = "https://via.placeholder.com/150";
 
 
                             <View>
-                                <Text style={{color:'gray',  fontSize:15}}>[Example use]</Text>
+                                <Divider style={{ backgroundColor: 'grey'}}></Divider>
+
+                                <Text style={{color:'gray', marginVertical:'1%', fontSize:15}}>[Example use]</Text>
 
                                 <Text style={{color:'black', fontSize:16, marginBottom: 10}}>Example use of how to use the native word we are looking at in the picture</Text>
 
@@ -190,7 +194,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         backgroundColor:'white',
         width: '100%',
-        height: 170
+        height: windowHeight*0.25
     },
     detailView:{
         paddingTop: '2%',
