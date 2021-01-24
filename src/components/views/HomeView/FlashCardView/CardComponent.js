@@ -70,7 +70,13 @@ import {
         return <View style={[styles.ansView]}> 
                     {options.map(element => ( 
                             <Card style={styles.ans}>
-                                 <TouchableOpacity style={styles.touchableView}>
+                                 <TouchableOpacity 
+                                     style={styles.touchableView}
+                                     onPress={ ()=>{
+                                        props.onAswer("text", element)}
+                                     }
+                                     >
+                                     
                                     <Text key={element}> {element} </Text>
                                  </TouchableOpacity>
                                 
@@ -189,7 +195,7 @@ import {
             return TextAnswerView
         }
     }
-    export default class CardComposer extends React.Component{
+    export default class CardComponent extends React.Component{
 
         constructor(props){
             super(props)
@@ -213,6 +219,7 @@ import {
                     
                     <AnswerView
                         content={this.props.answer}
+                        onAswer={this.props.onAswer}
                       />
                     </>               
         }
