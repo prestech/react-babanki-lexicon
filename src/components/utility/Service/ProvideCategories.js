@@ -11,7 +11,7 @@ import React from 'react'
  *      -return the list of categories.  
  */
 
-import {getComponent} from './SvgManager'; //when importing function wrap them in {}
+import {getComponent} from './ImgProvider'; //when importing function wrap them in {}
 
 import {lexicon} from './LexiconMananger';
 

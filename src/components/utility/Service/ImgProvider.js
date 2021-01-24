@@ -23,3 +23,14 @@ export const getComponent = (name)=>{
     }
 }
 
+
+
+export const images = {
+  'rooster':require('../../../resource/img/rooster.png'),
+  'cloud':require('../../../resource/img/cloud.png'),
+  'elbow':require('../../../resource/img/elbow.png'),
+  'lion':require('../../../resource/img/lion.png')
+
+}
+
+

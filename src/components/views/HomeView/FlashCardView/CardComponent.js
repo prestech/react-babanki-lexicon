@@ -11,10 +11,8 @@ import {
     Dimensions
    } from 'react-native'
    import {Card} from 'react-native-shadow-cards'
-
-   import GridAdapter from '../../../utility/Layout/Grid/GridAdapter'
-
-   const imageUrl = "https://via.placeholder.com/150";
+   
+   import {images} from '../../../utility/Service/ImgProvider'
 
    /**
     * Components
@@ -43,8 +41,10 @@ import {
     */
     const TextQuestionView = (props)=>{
         const titleText = props.content;
+        mstyle = JSON.parse(JSON.stringify(styles.quest))
+        mstyle.height='20%'
 
-        return <Card style={styles.quest}>
+        return <Card style={mstyle}>
                     <Text style={styles.questText}> {titleText}</Text> 
             </Card> 
     }
@@ -95,12 +95,12 @@ import {
             return mstyle
         }//hightlightAns Ends 
 
-        options = props.content.options
+        options = props.content
                    
        
         return <View style={[styles.ansView]}> 
                     {options.map(element => ( 
-                            <Card style={hightlightAns(props.showResult, props.result, element)}>
+                            <Card key={element} style={hightlightAns(props.showResult, props.result, element)}>
                                  <TouchableOpacity 
                                      style={styles.touchableView}
                                      onPress={ ()=>{
@@ -108,7 +108,7 @@ import {
                                      }
                                      >
                                      
-                                    <Text key={element}> {element} </Text>
+                                    <Text> {element} </Text>
                                  </TouchableOpacity>
                                 
                             </Card> ))} 
@@ -142,25 +142,32 @@ import {
             }
              
         })
-        return <View style={styles.ansView}> 
-                    {props.content.map(element => ( 
-                                <View style={localStyle.container}>
 
+        hightlightAns = (showResult, results, userMatch) =>{
+
+        }
+        return <View style={styles.ansView}> 
+                    {props.content.map( (element, index)=> {
+                        console.log(element.text)
+                        return ( 
+                                <View key={index} style={localStyle.container}>
+                                    
+                        
                                     <Card style={localStyle.imgContainer}>
                                         <TouchableOpacity style={styles.touchableView}>
                                             <Image  style={styles.image}
-                                                    source={require('../../../../resource/img/rooster.png')}
+                                                    source={images[element.img]}
                                                     resizeMode='contain'/>
                                         </TouchableOpacity>
                                     </Card>
                                     
                                     <Card style={localStyle.wordContainer}>
                                         <TouchableOpacity style={styles.touchableView}> 
-                                            <Text key={element}>{element}</Text>
+                                            <Text>{element.text}</Text>
                                         </TouchableOpacity>
                                     </Card>
                                 </View> 
-                            )
+                            )}
                         )
                     } 
                 </View>
@@ -205,7 +212,7 @@ import {
         QUEST_VIEW_WITH_IMAGE: 'QUEST_VIEW_WITH_IMAGE',
         TEXT_QUEST_VIEW: 'TEXT_QUEST_VIEW',
         ANS_VIEW_WITH_IMAGE:'ANS_VIEW_WITH_IMAGE',
-        ANS_VIEW_MATCH_TEX_IMAGE: 'ANS_VIEW_MATCH_TEX_IMAGE',
+        ANS_VIEW_MATCH_TEXT_IMAGE: 'ANS_VIEW_MATCH_TEXT_IMAGE',
         TEXT_ANS_VIEW: 'TEXT_ANS_VIEW'
     }
 
@@ -220,7 +227,7 @@ import {
     resolveAnswerView = (viewType) => {
         if(viewType == VIEW_TYPES.ANS_VIEW_WITH_IMAGE){
             return AnswerViewWithImage
-        }else if(viewType == VIEW_TYPES.ANS_VIEW_MATCH_TEX_IMAGE){
+        }else if(viewType == VIEW_TYPES.ANS_VIEW_MATCH_TEXT_IMAGE){
             return AnswerViewMatchWordAndImage
         }else {
             return TextAnswerView

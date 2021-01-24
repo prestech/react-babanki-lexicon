@@ -151,10 +151,12 @@ export default class CardResolver extends React.Component{
                     </Card>
                     
                     <CardComponent 
-                        questViewType={VIEW_TYPES.QUEST_VIEW_WITH_IMAGE}
-                        ansViewType={VIEW_TYPES.TEXT_ANS_VIEW}
-                        question={{text:"Select '"+this.state.lexiconContext.englishWord+"'", imageurl:require('../../../../resource/img/rooster.png') }} 
-                        answer={ {options:["chicken", "fish", correctAnswer, "house"], correct:[]}}
+                        questViewType={VIEW_TYPES.TEXT_QUEST_VIEW}
+                        ansViewType={VIEW_TYPES.ANS_VIEW_MATCH_TEXT_IMAGE}
+                        //question={{text:"Select '"+this.state.lexiconContext.englishWord+"'", imageurl:require('../../../../resource/img/rooster.png') }} 
+                        question={"Select '"+this.state.lexiconContext.englishWord+"'"} 
+                        //answer={["cloud","rooster","rooster","cloud","lion"]}
+                        answer={[{img:"cloud", text:"elbow"},{img:"rooster", text:"rooster"} , {img:"lion", text:"cloud"},  {img:"elbow", text:"lion"}]}
                         onAswer={this.onAnswer}
                         showResult={this.state.showResult}
                         result={this.state.result}

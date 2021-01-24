@@ -9,7 +9,7 @@ import {
         Dimensions,
         Image
         } from 'react-native'
-import {getComponent} from '../../../utility/Service/SvgManager'
+import {getComponent} from '../../../utility/Service/ImgProvider'
 import { black } from 'color-name'
 
 const imageUrl = "https://via.placeholder.com/150";
