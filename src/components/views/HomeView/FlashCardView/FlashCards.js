@@ -19,7 +19,7 @@ export default class FlashCard extends React.Component{
         super(props);
 
         this.state={
-            data:["EASY","INTERMEDIATE","HARD"],
+            data:["EASY","MID","HARD"],
         }
 
         this.extractKey = this.extractKey.bind(this);
