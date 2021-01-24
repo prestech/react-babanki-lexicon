@@ -13,6 +13,7 @@ import {Card} from 'react-native-shadow-cards'
 import CardComponent, {VIEW_TYPES} from './CardComponent';
 import { Value } from 'react-native-reanimated';
 import {sampleLexicon} from '../../../utility/Service/LexiconMananger'
+import { colors } from 'react-native-elements';
 
 /**
  * Functions of the Card Resolver
@@ -33,6 +34,7 @@ import {sampleLexicon} from '../../../utility/Service/LexiconMananger'
  * Each flash card session should have twenty questions 
  * After answering all 20 question ask use if they want another 20
  */
+
 export default class CardResolver extends React.Component{
 
     constructor(props){
@@ -46,37 +48,68 @@ export default class CardResolver extends React.Component{
         */
         super(props);
         this.state = {
-            lexiconContext:sampleLexicon()
+            lexiconContext:sampleLexicon(),
+            isNativeWord: true,
+            showResult: false,
+            result: null
         }
 
         this.onAnswer = this.onAnswer.bind(this)
+        this.getExpectResult = this.getExpectResult.bind(this)
     }
 
-    onAnswer(selectType, answer){
-
-        //validate selection 
-        console.log("validate selection")
+    onAnswer(ANS_VIEW_TYPE, SELECTED_DATA){
 
         /**
-         * provide feedback based on selection
-         * highlight the correct answer green and wrong answer red.
-         * update the counts  
+         * validate selection 
+         *  provide feedback based on selection
+         *  highlight the correct answer green and wrong answer red.
+         *  update the counts  
         */
-        console.log("provide selection feedback")
+        result=this.respondToSelection(ANS_VIEW_TYPE, SELECTED_DATA)
 
+        console.log(result+": SELECTED_DATA: "+ SELECTED_DATA, " CORRECT_ANS: "+ this.getExpectResult())
+
+        this.setState(()=>({
+            result : {isCorrect: result, selectedAns: SELECTED_DATA, correctAns: this.getExpectResult() }       
+        }), ()=>{
+            this.setState({showResult:true})
+        })
 
         /**
          * Inform user to tap screen and then generate next question
-         */ 
-         
+            -set result to null and showResult to false
         newLexiconContext=sampleLexicon()
+
         console.log("Next question: "+newLexiconContext.englishWord)
         console.log("Answer "+answer)
         
         this.setState(()=>{
             lexiconContext = newLexiconContext
             return lexiconContext
-        })
+        })*/ 
+    }
+
+    respondToSelection(ANS_VIEW_TYPE, selectedData ){
+    
+        switch(ANS_VIEW_TYPE){
+    
+            case VIEW_TYPES.TEXT_ANS_VIEW:
+                return (selectedData == this.getExpectResult())
+            
+            case VIEW_TYPES.ANS_VIEW_WITH_IMAGE:
+
+                break 
+        }
+    }
+
+    //isNativeWord should be a state value
+    getExpectResult(){
+        if(this.state.isNativeWord == true){
+            return this.state.lexiconContext.kejomWord
+        }else{
+            return this.state.lexiconContext.englishWord
+        }
     }
 
     generateQuestion=(questViewType, ansViewType)=>{
@@ -87,7 +120,9 @@ export default class CardResolver extends React.Component{
     }
     render(){
         
-        console.log(lexiconContext.kejomWord)
+        correctAnswer=this.getExpectResult()
+        console.log(this.state.showResult)
+
         return( <>  
                     {/** flash card stats ui: keeps count of correct ans, wrong ans, and total nunmber of flash cards parsed*/}
                     <Card style={styles.count}>
@@ -99,9 +134,11 @@ export default class CardResolver extends React.Component{
                     <CardComponent 
                         questViewType={VIEW_TYPES.QUEST_VIEW_WITH_IMAGE}
                         ansViewType={VIEW_TYPES.TEXT_ANS_VIEW}
-                        question={{text:"Select '"+lexiconContext.englishWord+"'", imageurl:require('../../../../resource/img/rooster.png') }} 
-                        answer={ {options:["chicken", "fish", lexiconContext.kejomWord, "house"], correct:[]}}
+                        question={{text:"Select '"+this.state.lexiconContext.englishWord+"'", imageurl:require('../../../../resource/img/rooster.png') }} 
+                        answer={ {options:["chicken", "fish", correctAnswer, "house"], correct:[]}}
                         onAswer={this.onAnswer}
+                        showResult={this.state.showResult}
+                        result={this.state.result}
                     />
                 </>
         )

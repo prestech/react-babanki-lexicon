@@ -66,14 +66,45 @@ import {
     }
 
     const TextAnswerView = (props) => {
+
+        hightlightAns = (showResult, results, ansOption) => {
+            
+            console.log("hightlightAns: "+showResult)
+            console.log("hightlightAns results: "+results)
+            if(showResult == false || results == null){
+                return styles.ans
+            }
+            console.log("Tyep style: "+ (Object.values(results)))
+
+            mstyle = JSON.parse(JSON.stringify(styles.ans))
+            
+            if(results.isCorrect == true && results.correctAns == ansOption){
+                mstyle.borderWidth = 2
+                mstyle.borderColor = '#98fb98'
+                return mstyle
+            }else if (results.isCorrect == true) return mstyle;
+
+            if(results.isCorrect == false && results.selectedAns == ansOption){   
+                mstyle.borderWidth = 1
+                mstyle.borderColor = 'red'
+            }else if (results.correctAns == ansOption){
+                mstyle.borderWidth = 2
+                mstyle.borderColor = '#98fb98'
+            }
+
+            return mstyle
+        }
+
         options = props.content.options
+                   
+       
         return <View style={[styles.ansView]}> 
                     {options.map(element => ( 
-                            <Card style={styles.ans}>
+                            <Card style={hightlightAns(props.showResult, props.result, element)}>
                                  <TouchableOpacity 
                                      style={styles.touchableView}
                                      onPress={ ()=>{
-                                        props.onAswer("text", element)}
+                                        props.onAswer(VIEW_TYPES.TEXT_ANS_VIEW, element)}
                                      }
                                      >
                                      
@@ -220,14 +251,15 @@ import {
                     <AnswerView
                         content={this.props.answer}
                         onAswer={this.props.onAswer}
+                        showResult={this.props.showResult}
+                        result={this.props.result}
                       />
                     </>               
         }
     }
 
 
-    const styles = StyleSheet.create({
-        
+    styles = StyleSheet.create({
         quest:{
             backgroundColor: 'white',
             height: '40%',
