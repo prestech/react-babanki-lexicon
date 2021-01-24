@@ -93,7 +93,7 @@ import {
             }
 
             return mstyle
-        }
+        }//hightlightAns Ends 
 
         options = props.content.options
                    
@@ -113,7 +113,7 @@ import {
                                 
                             </Card> ))} 
                 </View>
-    }
+    }//TextAnswerView Ends
 
     const AnswerViewMatchWordAndImage = (props) => {
         

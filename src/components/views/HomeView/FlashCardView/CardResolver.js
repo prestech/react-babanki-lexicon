@@ -51,7 +51,10 @@ export default class CardResolver extends React.Component{
             lexiconContext:sampleLexicon(),
             isNativeWord: true,
             showResult: false,
-            result: null
+            result: null,
+            correctCount:0,
+            wrongCount:0,
+            quizCount:0
         }
 
         this.onAnswer = this.onAnswer.bind(this)
@@ -73,21 +76,37 @@ export default class CardResolver extends React.Component{
         this.setState(()=>({
             result : {isCorrect: result, selectedAns: SELECTED_DATA, correctAns: this.getExpectResult() }       
         }), ()=>{
-            this.setState({showResult:true})
+            this.setState( (state)=>({
+                    showResult:true,
+                    quizCount: state.quizCount+1
+                }) )
+
+            if(result == true){
+                this.setState((state)=>({
+                    correctCount: state.correctCount+1
+                }) )
+            }else{
+                this.setState((state)=>({
+                    wrongCount: state.wrongCount+1
+                }) )
+            }
         })
 
         /**
          * Inform user to tap screen and then generate next question
             -set result to null and showResult to false
-        newLexiconContext=sampleLexicon()
-
-        console.log("Next question: "+newLexiconContext.englishWord)
-        console.log("Answer "+answer)
+        */
+        setTimeout( ()=>{
         
-        this.setState(()=>{
-            lexiconContext = newLexiconContext
-            return lexiconContext
-        })*/ 
+            newLexiconContext=sampleLexicon()
+        
+            console.log("Next question: "+newLexiconContext.englishWord)
+            this.setState({ result:null, 
+                            showResult:false,
+                            lexiconContext:newLexiconContext })
+            
+        }, 3000)
+        
     }
 
     respondToSelection(ANS_VIEW_TYPE, selectedData ){
@@ -126,9 +145,9 @@ export default class CardResolver extends React.Component{
         return( <>  
                     {/** flash card stats ui: keeps count of correct ans, wrong ans, and total nunmber of flash cards parsed*/}
                     <Card style={styles.count}>
-                        <Text style={{alignSelf:'center', fontSize:20}}>{"1 of 20"}</Text>
-                        <Text style={{alignSelf:'center', fontSize:20}}>{"correct: 2"}</Text>
-                        <Text style={{alignSelf:'center', fontSize:20}}>{"wrong: 0"}</Text>
+                        <Text style={{alignSelf:'center', fontSize:20}}>{ this.state.quizCount + " of 20"}</Text>
+                        <Text style={{alignSelf:'center', fontSize:20}}>{"correct: "+this.state.correctCount}</Text>
+                        <Text style={{alignSelf:'center', fontSize:20}}>{"wrong: "+this.state.wrongCount}</Text>
                     </Card>
                     
                     <CardComponent 
