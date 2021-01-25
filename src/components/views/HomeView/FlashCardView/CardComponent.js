@@ -1,7 +1,6 @@
-//'use strict'
+'use strict'
 
-import React, {useState} from 'react'
-import Modal from 'react-native-modal';
+import React, {useState} from 'react';
 import {
     View,
     Text,
@@ -67,7 +66,7 @@ import {
 
     const TextAnswerView = (props) => {
 
-        hightlightAns = (showResult, results, ansOption) => {
+        let hightlightAns = (showResult, results, ansOption) => {
             
             console.log("hightlightAns: "+showResult)
             console.log("hightlightAns results: "+results)
@@ -143,8 +142,39 @@ import {
              
         })
 
-        hightlightAns = (showResult, results, userMatch) =>{
+        const [userSelection, setSelection] = useState([])
+        const [selectedImg, setImg] = useState("")
+        const [selectedWord, setWord] = useState("")
 
+        
+        let hightlightAns = (showResult, results, userMatch) =>{
+
+        }
+        let onSelect = (input, leftRight) =>{
+           
+
+            //make sure input is not already selected by checking in userSelection
+
+           if(leftRight=="left"){
+               
+                if (selectedImg == input) {
+                    setImg("")
+                }else{
+                    setImg(input)
+                }
+           }else{
+                if(selectedWord == input){
+                    setWord("")
+                }else {
+                    setWord(input)
+                }
+           }
+           console.log("selectedWord: "+selectedWord+ " selectedImg: "+selectedImg)
+           if(selectedWord != "" && selectedImg  != ""){
+               setSelection([...userSelection, {right:selectedImg, left:selectedWord}])
+               setWord("")
+               setImg("")
+           }
         }
         return <View style={styles.ansView}> 
                     {props.content.map( (element, index)=> {
@@ -154,7 +184,10 @@ import {
                                     
                         
                                     <Card style={localStyle.imgContainer}>
-                                        <TouchableOpacity style={styles.touchableView}>
+                                        <TouchableOpacity style={styles.touchableView}
+                                            onPress={ ()=>{
+                                                onSelect(element.img, "left")
+                                            }}>
                                             <Image  style={styles.image}
                                                     source={images[element.img]}
                                                     resizeMode='contain'/>
@@ -162,7 +195,11 @@ import {
                                     </Card>
                                     
                                     <Card style={localStyle.wordContainer}>
-                                        <TouchableOpacity style={styles.touchableView}> 
+                                        <TouchableOpacity 
+                                            style={styles.touchableView}
+                                            onPress={ ()=>{
+                                                onSelect(element.text, "right")
+                                            }}> 
                                             <Text>{element.text}</Text>
                                         </TouchableOpacity>
                                     </Card>
