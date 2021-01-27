@@ -37,10 +37,12 @@ import {
     *  What do you hear?
     *  What do you read? 
     *  Tap the matching pair
+    * 
+    *    
     */
     const TextQuestionView = (props)=>{
         const titleText = props.content;
-        mstyle = JSON.parse(JSON.stringify(styles.quest))
+        let mstyle = JSON.parse(JSON.stringify(styles.quest))
         mstyle.height='20%'
 
         return <Card style={mstyle}>
@@ -75,7 +77,7 @@ import {
             }
             console.log("Tyep style: "+ (Object.values(results)))
 
-            mstyle = JSON.parse(JSON.stringify(styles.ans))
+            let mstyle = JSON.parse(JSON.stringify(styles.ans))
             
             if(results.isCorrect == true && results.correctAns == ansOption){
                 mstyle.borderWidth = 2
@@ -114,17 +116,41 @@ import {
                 </View>
     }//TextAnswerView Ends
 
+    const AnswerCell = (props) => {
+        const [borderWidth, setBorderWith] = useState(0)
+        let mStyle = JSON.parse(JSON.stringify(props.style))
+        mStyle.borderWidth = borderWidth
+        mStyle.borderColor = props.borderColor
+
+        const hightlightCell=()=>{
+            
+            new Promise( (resolve) => {if(borderWidth==0){
+                                setBorderWith(2)
+                            }else{
+                                setBorderWith(0)
+                            }
+                            resolve()
+                        }).then(()=>{
+                            props.parentCallBack(props.cellKey, mStyle.borderColor, props.column)
+                        })
+        }   
+       
+     
+        return <Card style={mStyle}>
+                <TouchableOpacity style={styles.touchableView}
+                    onPress={ ()=>{
+                        //props.onSelect(element.img, "left")
+                        hightlightCell()
+                    }}>
+                    {props.childView}
+                </TouchableOpacity>
+            </Card>
+    }
+    
     const AnswerViewMatchWordAndImage = (props) => {
         
-        localStyle = StyleSheet.create({
-            wordContainer:{
-               flex: 1,
-               height: '50%',
-               width: '100%',
-               marginHorizontal: '1%',
-               alignSelf:'center'
-            },
-            imgContainer:{
+        let localStyle = StyleSheet.create({
+            element:{
                 flex: 1,
                 height: '100%',
                 width: '100%',
@@ -142,67 +168,77 @@ import {
              
         })
 
-        const [userSelection, setSelection] = useState([])
-        const [selectedImg, setImg] = useState("")
-        const [selectedWord, setWord] = useState("")
+        const [selectedWord, setSelectWord] = useState([])
+        //const [activeElement, setActiveElement] = useState("")
+        const [mode, setMode] = useState("select")
+        const [touchCount, setTouchCount] = useState(0)
+        const [nextColor, setNextColor] = useState(0)
 
-        
-        let hightlightAns = (showResult, results, userMatch) =>{
+        const colors = ["yellow", "green", "blue", "pink"]
 
+        let onSelect = (key, color, leftRight) =>{
+            setTouchCount(touchCount+1)
+            console.log("Onselect triggered by "+ key)
+            let tempMatched = JSON.parse(JSON.stringify(selectedWord))
+            tempMatched.push(key+"_"+color)
+            setSelectWord([tempMatched] )
+            console.log("activeColor values "+tempMatched)
+            
+            //console.log("mode mode mode  mode "+ mode)
         }
-        let onSelect = (input, leftRight) =>{
-           
 
-            //make sure input is not already selected by checking in userSelection
+        React.useEffect( () => {
+            console.log("Touch count "+ touchCount)
+            if(touchCount%2 == 0 && touchCount != 0){
+                setNextColor(nextColor+1)
+            } 
+        }, [touchCount] )
 
-           if(leftRight=="left"){
-               
-                if (selectedImg == input) {
-                    setImg("")
-                }else{
-                    setImg(input)
+        let highlight = (itemData)=>{
+            let selected = JSON.parse(JSON.stringify(selectedWord)).toString().split(",")
+            if(selected.length > 0){
+                for ( let i in selected ){
+                    //console.log(selected[i] + " Looking "+ i)
+                    let parts = selected[i].split("_")
+                    if(parts[0] == itemData){
+                        //console.log("Found "+ itemData + " with color ")
+                        return parts[1]
+                    }
                 }
-           }else{
-                if(selectedWord == input){
-                    setWord("")
-                }else {
-                    setWord(input)
-                }
-           }
-           console.log("selectedWord: "+selectedWord+ " selectedImg: "+selectedImg)
-           if(selectedWord != "" && selectedImg  != ""){
-               setSelection([...userSelection, {right:selectedImg, left:selectedWord}])
-               setWord("")
-               setImg("")
-           }
+
+                return colors[nextColor] 
+            } 
+          
+            return colors[nextColor] 
         }
         return <View style={styles.ansView}> 
                     {props.content.map( (element, index)=> {
-                        console.log(element.text)
+                        const leftElement = (<Image  style={styles.image}
+                                                source={images[element.img]}
+                                                resizeMode='contain'/>)
+                        const rightElement = (<Text>{element.text}</Text>)
+                        
                         return ( 
                                 <View key={index} style={localStyle.container}>
                                     
                         
-                                    <Card style={localStyle.imgContainer}>
-                                        <TouchableOpacity style={styles.touchableView}
-                                            onPress={ ()=>{
-                                                onSelect(element.img, "left")
-                                            }}>
-                                            <Image  style={styles.image}
-                                                    source={images[element.img]}
-                                                    resizeMode='contain'/>
-                                        </TouchableOpacity>
-                                    </Card>
-                                    
-                                    <Card style={localStyle.wordContainer}>
-                                        <TouchableOpacity 
-                                            style={styles.touchableView}
-                                            onPress={ ()=>{
-                                                onSelect(element.text, "right")
-                                            }}> 
-                                            <Text>{element.text}</Text>
-                                        </TouchableOpacity>
-                                    </Card>
+                                    <AnswerCell
+                                        borderColor={highlight("img:"+element.img)}
+                                        cellKey={("img:"+element.img)}
+                                        style={localStyle.element}
+                                        childView={leftElement}
+                                        column="left"
+                                        parentCallBack={onSelect}
+                                    />
+                                    <AnswerCell
+                                        borderColor={highlight("text:"+element.text)}
+                                        cellKey={("text:"+element.text)}
+                                        style={localStyle.element}
+                                        childView={rightElement}
+                                        column="right"
+                                        parentCallBack={onSelect}
+                                    />
+
                                 </View> 
                             )}
                         )
@@ -212,7 +248,7 @@ import {
 
     const AnswerViewWithImage = (props) => {
         
-        localStyle = StyleSheet.create({
+        let localStyle = StyleSheet.create({
             imgContainer:{
                 height: '40%',
                 width: '48%',
@@ -253,7 +289,7 @@ import {
         TEXT_ANS_VIEW: 'TEXT_ANS_VIEW'
     }
 
-    resolveQuestionView = (viewType) => {
+    const resolveQuestionView = (viewType) => {
         if(viewType == VIEW_TYPES.QUEST_VIEW_WITH_IMAGE){
             return QuestionViewWithImage
         }else {
@@ -261,7 +297,7 @@ import {
         }
     }
 
-    resolveAnswerView = (viewType) => {
+    const resolveAnswerView = (viewType) => {
         if(viewType == VIEW_TYPES.ANS_VIEW_WITH_IMAGE){
             return AnswerViewWithImage
         }else if(viewType == VIEW_TYPES.ANS_VIEW_MATCH_TEXT_IMAGE){
@@ -284,8 +320,8 @@ import {
             console.log("MCQ component mounted")
         }
         render(){
-            QuestionView = resolveQuestionView(this.props.questViewType)
-            AnswerView = resolveAnswerView(this.props.ansViewType)
+            const QuestionView = resolveQuestionView(this.props.questViewType)
+            const AnswerView = resolveAnswerView(this.props.ansViewType)
             
             return <>
                     <QuestionView
@@ -303,7 +339,7 @@ import {
     }
 
 
-    styles = StyleSheet.create({
+   const styles = StyleSheet.create({
         quest:{
             backgroundColor: 'white',
             height: '40%',
