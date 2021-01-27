@@ -1,6 +1,6 @@
 'use strict'
 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
     View,
     Text,
@@ -147,6 +147,13 @@ import {
             </Card>
     }
     
+    /**
+     * Implement unselect function
+     * Ensure that there is not img-to-img or text-to-txt mapping 
+     * (on element on the left must be mapped to one on the right and vice verser)
+     * 
+     * @param {} props 
+     */
     const AnswerViewMatchWordAndImage = (props) => {
         
         let localStyle = StyleSheet.create({
@@ -169,14 +176,30 @@ import {
         })
 
         const [selectedWord, setSelectWord] = useState([])
-        //const [activeElement, setActiveElement] = useState("")
-        const [mode, setMode] = useState("select")
         const [touchCount, setTouchCount] = useState(0)
         const [nextColor, setNextColor] = useState(0)
+        const [nextColumn, setNextColumn] = useState("") //ensure that items are select from oposite columns
 
         const colors = ["yellow", "green", "blue", "pink"]
+        const leftCol = "LEFT"
+        const rightCol = "RIGHT"
 
-        let onSelect = (key, color, leftRight) =>{
+        const onSelect = (key, color, column) =>{
+
+            //if item is already matched, should we undo the matching?
+            let result = cellIsMatched(color)
+            if(result == true){
+                //return
+            }
+            console.log(" Match result " + result)
+
+            //TODO: figure out nextColum situation
+            if(nextColumn == ""){
+                setNextColumn(column)
+            }
+
+            setNextColumn( ((column == leftCol)? rightCol: leftCol) )
+
             setTouchCount(touchCount+1)
             console.log("Onselect triggered by "+ key)
             let tempMatched = JSON.parse(JSON.stringify(selectedWord))
@@ -187,7 +210,14 @@ import {
             //console.log("mode mode mode  mode "+ mode)
         }
 
-        React.useEffect( () => {
+        
+
+        
+        useEffect( () => {
+            console.log("useEffect nextColumn "+ nextColumn)
+        }, [nextColumn] )
+
+        useEffect( () => {
             console.log("Touch count "+ touchCount)
             if(touchCount%2 == 0 && touchCount != 0){
                 setNextColor(nextColor+1)
@@ -211,6 +241,18 @@ import {
           
             return colors[nextColor] 
         }
+
+        const cellIsMatched = (color) => {
+            let selected = JSON.parse(JSON.stringify(selectedWord)).toString().split(",")
+            let key = "_"+color
+            
+            let result = selected.find(value => {
+                console.log("Looking in "+ value)
+                return value.includes(key)
+            });
+            return (result != null)
+        }
+
         return <View style={styles.ansView}> 
                     {props.content.map( (element, index)=> {
                         const leftElement = (<Image  style={styles.image}
@@ -227,7 +269,7 @@ import {
                                         cellKey={("img:"+element.img)}
                                         style={localStyle.element}
                                         childView={leftElement}
-                                        column="left"
+                                        column={leftCol}
                                         parentCallBack={onSelect}
                                     />
                                     <AnswerCell
@@ -235,7 +277,7 @@ import {
                                         cellKey={("text:"+element.text)}
                                         style={localStyle.element}
                                         childView={rightElement}
-                                        column="right"
+                                        column={rightCol}
                                         parentCallBack={onSelect}
                                     />
 
