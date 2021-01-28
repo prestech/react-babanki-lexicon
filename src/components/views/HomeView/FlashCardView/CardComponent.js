@@ -215,38 +215,36 @@ import {
                 setSelectWord([tempMatched] )
                 console.log("activeColor values "+tempMatched)
             }else{
+                console.log("Unselecting " )
                 setTouchCount(touchCount-1)
-                setNextColor( (nextColor==0)?0:(nextColor-1) )
+                setNextColumn(column)
                 //remove key from selectWord
                 removeSelectedCell(key)
             }
-            //console.log("mode mode mode  mode "+ mode)
+            //
         }
-
-        
-
         
         useEffect( () => {
             console.log("activeColor values "+selectedWord)
         }, [selectedWord] )
 
         useEffect( () => {
-            console.log("Touch count "+ touchCount)
+            //console.log("Touch count "+ touchCount)
             if(touchCount%2 == 0 && touchCount != 0){
-                setNextColor(nextColor+1)
+                setNextColor(nextUnusedColor())
             } 
         }, [touchCount] )
 
         useEffect( () => {
-            
-            if( colors[nextColor] == undefined){
-                console.log("NEXT COLOR ERROR: NEXT COLOR IS UNDEFINED ")
-            } 
+            console.log("NEXT COLOR: "+nextColor)
         }, [nextColor] )
 
+
         let highlight = (itemData)=>{
+
             let selected = JSON.parse(JSON.stringify(selectedWord)).toString().split(",")
             if(selected.length > 0){
+                //highlight already selected cells with their existing colors
                 for ( let i in selected ){
                     //console.log(selected[i] + " Looking "+ i)
                     let parts = selected[i].split("_")
@@ -255,32 +253,31 @@ import {
                         return parts[1]
                     }
                 }
-
                 //check if color is undefined. 
                 //check for unsed colors and set NextColor to its index
-                if (colors[nextColor] == undefined || colorIsUsed(colors[nextColor]) == true ){
-                    for(let c in colors){
-
-                        if(isLookingForMatch(colors[c]) == true){
-                            setNextColor(c)
-                            return colors[c]
-                        }
-                        else if(colorIsUsed(colors[c]) == false){
-                            setNextColor(c)
-                            return colors[c]
-                        }
-                    }
-                }
-                
+                return  colors[nextUnusedColor()]
             } 
             return colors[nextColor] 
         }
-        let removeSelectedCell = (cellKey)=>{
+
+        const nextUnusedColor = () => {
+           
+            for(let c in colors){
+                    if(isLookingForMatch(colors[c]) == true){
+                        return c
+                    }
+                    else if(colorIsUsed(colors[c]) == false){
+                        return  c
+                    }
+            }
+        }
+        
+        const removeSelectedCell = (cellKey)=>{
             let selected = JSON.parse(JSON.stringify(selectedWord)).toString().split(",")
             
             let filterdResult = selected.filter( item => {
                                 let parts = item.split("_")
-                                console.log(cellKey+ " Attempting to remove "+ parts[0])
+                                //console.log(cellKey+ " Attempting to remove "+ parts[0])
                                 return (parts[0] != cellKey)
                             })
             setSelectWord([JSON.parse(JSON.stringify(filterdResult))])
@@ -291,7 +288,7 @@ import {
             let key = "_"+color
             
             let result = selected.find(value => {
-                console.log("Looking in "+ value)
+                //console.log("Looking in "+ value)
                 return value.includes(key)
             });
             return (result != null)
