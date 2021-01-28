@@ -124,15 +124,22 @@ import {
 
         const hightlightCell=()=>{
             
-            new Promise( (resolve) => {if(borderWidth==0){
-                                setBorderWith(2)
-                            }else{
-                                setBorderWith(0)
-                            }
-                            resolve()
-                        }).then(()=>{
-                            props.parentCallBack(props.cellKey, mStyle.borderColor, props.column)
-                        })
+            if(props.nextColumn ==  props.column || props.nextColumn==""){
+                
+                new Promise( (resolve) => {
+
+                                if(borderWidth==0){
+                                    setBorderWith(2)
+                                    resolve("select")
+                                }else if(props.nextColumn==""){
+                                    setBorderWith(0)
+                                    resolve("unselect")
+                                }
+                                
+                            }).then((action)=>{
+                                props.parentCallBack(props.cellKey, mStyle.borderColor, props.column, action)
+                            })
+            }
         }   
        
      
@@ -184,29 +191,35 @@ import {
         const leftCol = "LEFT"
         const rightCol = "RIGHT"
 
-        const onSelect = (key, color, column) =>{
+        const onSelect = (key, color, column, action) =>{
 
+            console.log("My Action "+ action)
+            if(colorIsUsed(color) == true && nextColumn != ""){
+                return 
+            }
             //if item is already matched, should we undo the matching?
-            let result = cellIsMatched(color)
-            if(result == true){
-                //return
+            if(action == "select"){
+
+                let result = cellIsMatched(color)
+                if(result == true){
+                    setNextColumn("")
+                }else{
+                    //TODO: figure out nextColum situation
+                    setNextColumn( ((column == leftCol)? rightCol: leftCol) )
+                }
+                
+                setTouchCount(touchCount+1)
+                console.log("Onselect triggered by "+ key)
+                let tempMatched = JSON.parse(JSON.stringify(selectedWord))
+                tempMatched.push(key+"_"+color)
+                setSelectWord([tempMatched] )
+                console.log("activeColor values "+tempMatched)
+            }else{
+                setTouchCount(touchCount-1)
+                setNextColor( (nextColor==0)?0:(nextColor-1) )
+                //remove key from selectWord
+                removeSelectedCell(key)
             }
-            console.log(" Match result " + result)
-
-            //TODO: figure out nextColum situation
-            if(nextColumn == ""){
-                setNextColumn(column)
-            }
-
-            setNextColumn( ((column == leftCol)? rightCol: leftCol) )
-
-            setTouchCount(touchCount+1)
-            console.log("Onselect triggered by "+ key)
-            let tempMatched = JSON.parse(JSON.stringify(selectedWord))
-            tempMatched.push(key+"_"+color)
-            setSelectWord([tempMatched] )
-            console.log("activeColor values "+tempMatched)
-            
             //console.log("mode mode mode  mode "+ mode)
         }
 
@@ -214,8 +227,8 @@ import {
 
         
         useEffect( () => {
-            console.log("useEffect nextColumn "+ nextColumn)
-        }, [nextColumn] )
+            console.log("activeColor values "+selectedWord)
+        }, [selectedWord] )
 
         useEffect( () => {
             console.log("Touch count "+ touchCount)
@@ -223,6 +236,13 @@ import {
                 setNextColor(nextColor+1)
             } 
         }, [touchCount] )
+
+        useEffect( () => {
+            
+            if( colors[nextColor] == undefined){
+                console.log("NEXT COLOR ERROR: NEXT COLOR IS UNDEFINED ")
+            } 
+        }, [nextColor] )
 
         let highlight = (itemData)=>{
             let selected = JSON.parse(JSON.stringify(selectedWord)).toString().split(",")
@@ -236,12 +256,36 @@ import {
                     }
                 }
 
-                return colors[nextColor] 
+                //check if color is undefined. 
+                //check for unsed colors and set NextColor to its index
+                if (colors[nextColor] == undefined || colorIsUsed(colors[nextColor]) == true ){
+                    for(let c in colors){
+
+                        if(isLookingForMatch(colors[c]) == true){
+                            setNextColor(c)
+                            return colors[c]
+                        }
+                        else if(colorIsUsed(colors[c]) == false){
+                            setNextColor(c)
+                            return colors[c]
+                        }
+                    }
+                }
+                
             } 
-          
             return colors[nextColor] 
         }
-
+        let removeSelectedCell = (cellKey)=>{
+            let selected = JSON.parse(JSON.stringify(selectedWord)).toString().split(",")
+            
+            let filterdResult = selected.filter( item => {
+                                let parts = item.split("_")
+                                console.log(cellKey+ " Attempting to remove "+ parts[0])
+                                return (parts[0] != cellKey)
+                            })
+            setSelectWord([JSON.parse(JSON.stringify(filterdResult))])
+        } 
+         
         const cellIsMatched = (color) => {
             let selected = JSON.parse(JSON.stringify(selectedWord)).toString().split(",")
             let key = "_"+color
@@ -251,6 +295,26 @@ import {
                 return value.includes(key)
             });
             return (result != null)
+        }
+
+        const colorIsUsed = (color) => {
+            let selected = JSON.parse(JSON.stringify(selectedWord)).toString().split(",")
+            let key = "_"+color
+            
+            let result = selected.filter(value => {
+                return value.includes(key)
+            });
+            return (result.length==2)
+        }
+
+        const isLookingForMatch = (color) => {
+            let selected = JSON.parse(JSON.stringify(selectedWord)).toString().split(",")
+            let key = "_"+color
+            
+            let result = selected.filter(value => {
+                return value.includes(key)
+            });
+            return (result.length==1)
         }
 
         return <View style={styles.ansView}> 
@@ -270,6 +334,7 @@ import {
                                         style={localStyle.element}
                                         childView={leftElement}
                                         column={leftCol}
+                                        nextColumn={nextColumn}
                                         parentCallBack={onSelect}
                                     />
                                     <AnswerCell
@@ -278,6 +343,7 @@ import {
                                         style={localStyle.element}
                                         childView={rightElement}
                                         column={rightCol}
+                                        nextColumn={nextColumn}
                                         parentCallBack={onSelect}
                                     />
 
